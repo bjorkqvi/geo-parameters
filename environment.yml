@@ -1,0 +1,6 @@
+name: metaparameters
+channels:
+  - conda-forge
+dependencies:
+  - pint
+  - numpy

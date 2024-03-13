@@ -1,0 +1,15 @@
+[project]
+name = "metaparameters"
+version = "0.1.0"
+description = "Metadata of geophysical (especially wave) parameters"
+authors = [ { name = "Jan-Victor Björkqvist", email = "janvb@met.no" } ]
+dependencies = [ "numpy", "pint" ]
+
+#[project.optional-dependencies]
+#tests = [ "numpy", "xarray", "pandas", "utm", "geopy"]
+
+[project.urls]
+repository = "http://github.com/bjorkqvi/metaparameters"
+
+# [project.scripts]
+# "sfydata" = "sfy.cli.sfydata:sfy"
