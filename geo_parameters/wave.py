@@ -30,6 +30,15 @@ class HsSwell1(MetaParameter):
     _unit = ureg.m
 
 
+
+
+class Tp(MetaParameter):
+    _short_name = "tp"
+    _long_name = "peak_wave_period"
+    _standard_name = "sea_surface_wave_period_at_variance_spectral_density_maximum"
+    _unit = ureg.s
+
+
 class Tm01(MetaParameter):
     _short_name = "tm01"
     _long_name = "first_moment_mean_wave_period"
