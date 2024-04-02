@@ -1,14 +1,16 @@
-from . import parameters
+from . import wave, ocean, wind
 import inspect
 from .metaparameter import MetaParameter
 
 
 def list_of_parameters() -> list:
     parameter_list = []
-    for __, obj in inspect.getmembers(parameters):
-        if inspect.isclass(obj):
-            if issubclass(obj, MetaParameter) and not obj == MetaParameter:
-                parameter_list.append(obj)
+    modules_to_inspect = [wave, ocean, wind]
+    for module in modules_to_inspect:
+        for __, obj in inspect.getmembers(module):
+            if inspect.isclass(obj):
+                if issubclass(obj, MetaParameter) and not obj == MetaParameter:
+                    parameter_list.append(obj)
     return parameter_list
 
 

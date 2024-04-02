@@ -1,4 +1,4 @@
-from ..metaparameter import MetaParameter
+from .metaparameter import MetaParameter
 import pint
 
 ureg = pint.UnitRegistry()
