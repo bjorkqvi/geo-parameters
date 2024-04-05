@@ -1,8 +1,8 @@
 import xarray as xr
 import numpy as np
-from geo_parameters.geo_parameters.wave import Hs, Tp
-from geo_parameters.geo_parameters import get as gpget
-from geo_parameters.geo_parameters import dict_of_parameters
+from geo_parameters.wave import Hs, Tp
+from geo_parameters import get as gpget
+from geo_parameters import dict_of_parameters
 
 
 def test_names():

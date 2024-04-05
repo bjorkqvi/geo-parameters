@@ -1,6 +1,6 @@
-from geo_parameters.geo_parameters import get, dict_of_parameters
-from geo_parameters.geo_parameters.wave import Hs
-from geo_parameters.geo_parameters.wind import XWind
+from geo_parameters import get, dict_of_parameters
+from geo_parameters.wave import Hs
+from geo_parameters.wind import XWind
 
 
 def test_get_wave():

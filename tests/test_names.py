@@ -1,4 +1,4 @@
-from geo_parameters.geo_parameters.wave import Hs
+from geo_parameters.wave import Hs
 
 
 def test_name_of_class():
