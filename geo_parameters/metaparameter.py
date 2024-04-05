@@ -1,6 +1,6 @@
-from abc import ABC, abstractstaticmethod
+from abc import ABC, abstractmethod
 import numpy as np
-
+from typing import Union
 from pint import Unit
 
 
@@ -10,23 +10,23 @@ class MetaParameter(ABC):
     def __init__(self, name: str = ""):
         self._name = name or self.short_name()
 
-    @property
-    @abstractstaticmethod
+    @staticmethod
+    @abstractmethod
     def _short_name() -> str:
         pass
 
-    @property
-    @abstractstaticmethod
+    @staticmethod
+    @abstractmethod
     def _long_name() -> str:
         pass
 
-    @property
-    @abstractstaticmethod
+    @staticmethod
+    @abstractmethod
     def _standard_name() -> str:
         pass
 
-    @property
-    @abstractstaticmethod
+    @staticmethod
+    @abstractmethod
     def _unit() -> str:
         pass
 
@@ -88,7 +88,7 @@ class MetaParameter(ABC):
         }
 
     @classmethod
-    def find_me_in_ds(cls, ds) -> str | None:
+    def find_me_in_ds(cls, ds) -> Union[str, None]:
         """Takes an Xarray Dataset and returns name of variable that matches the parameter based on standard_name"""
         data_vars = list(ds.data_vars)
 
