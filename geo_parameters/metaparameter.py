@@ -63,6 +63,9 @@ class MetaParameter(ABC):
     def unit(cls) -> Unit:
         return cls._unit
 
+    def __repr__(self):
+        return self.name()
+
     def quantify(self):
         return self * self.unit()
 
