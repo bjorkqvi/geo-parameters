@@ -11,6 +11,7 @@ def test_names():
 
     hsig = Hs(name="hsig")
     assert hsig.name() == "hsig"
+    assert str(Hs(name="hsig")) == str("hsig")
 
     assert hsig.standard_name() == "sea_surface_wave_significant_height"
     assert hsig.long_name() == "significant_wave_height"

@@ -33,6 +33,13 @@ hsig.name()
 'hsig'
 ```
 
+The string value of an instant is also the name, so the instance can conveniently be used almost interchangeably with string identifiers
+
+```python
+assert str(Hs(name='hsig')) == str('hsig')
+```
+
+
 The instance still contains the standard name (and some long name that doesn't follow any standard):
 
 ```python
