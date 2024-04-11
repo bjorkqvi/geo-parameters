@@ -328,6 +328,27 @@ class Efth(MetaParameter):
     _unit = ureg.m * ureg.m * ureg.s / ureg.rad
 
 
+class Freq(MetaParameter):
+    name = "freq"
+    _long_name = "frequency"
+    _standard_name = ["wave_frequency", "sea_surface_wave_frequency"]
+    _unit = ureg.s**-1
+
+
+class DirFrom(MetaParameter):
+    name = "dir"
+    _long_name = "wave_direction"
+    _standard_name = "sea_surface_wave_from_direction"
+    _unit = ureg.deg
+
+
+class DirTo(MetaParameter):
+    name = "dir"
+    _long_name = "wave_direction"
+    _standard_name = "sea_surface_wave_to_direction"
+    _unit = ureg.deg
+
+
 ## Moments (non-standard)
 class M0(MetaParameter):
     name = "m0"
