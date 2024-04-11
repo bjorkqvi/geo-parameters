@@ -335,15 +335,15 @@ class Freq(MetaParameter):
     _unit = ureg.s**-1
 
 
-class DirFrom(MetaParameter):
-    name = "dir"
+class DirsFrom(MetaParameter):
+    name = "dirs"
     _long_name = "wave_direction"
     _standard_name = "sea_surface_wave_from_direction"
     _unit = ureg.deg
 
 
-class DirTo(MetaParameter):
-    name = "dir"
+class DirsTo(MetaParameter):
+    name = "dirs"
     _long_name = "wave_direction"
     _standard_name = "sea_surface_wave_to_direction"
     _unit = ureg.deg
