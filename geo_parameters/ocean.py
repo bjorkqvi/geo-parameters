@@ -3,15 +3,18 @@ import pint
 
 ureg = pint.UnitRegistry()
 
+ureg.default_format = "~C"
+
 
 class WaterDepth(MetaParameter):
-    _short_name = "depth"
+    name = "depth"
     _long_name = "water_depth"
     _standard_name = "sea_floor_depth_below_sea_surface"
     _unit = ureg.m
 
+
 class SeaLevel(MetaParameter):
-    _short_name = "eta"
+    name = "eta"
     _long_name = "sea_surface_height"
     _standard_name = [
         "sea_surface_elevation",
@@ -22,7 +25,7 @@ class SeaLevel(MetaParameter):
 
 
 class XCurrent(MetaParameter):
-    _short_name = "x_current"
+    name = "x_current"
     _long_name = "eastward_current_component"
     _standard_name = [
         "sea_water_x_velocity",
@@ -32,7 +35,7 @@ class XCurrent(MetaParameter):
 
 
 class YCurrent(MetaParameter):
-    _short_name = "y_current"
+    name = "y_current"
     _long_name = "northward_current_component"
     _standard_name = [
         "sea_water_y_velocity",
@@ -42,15 +45,14 @@ class YCurrent(MetaParameter):
 
 
 class IceFraction(MetaParameter):
-    _short_name = "ice_fraction"
+    name = "ice_fraction"
     _long_name = "sea_ice_fraction"
     _standard_name = "sea_ice_area_fraction"
     _unit = ureg.percent
 
 
 class IceThickness(MetaParameter):
-    _short_name = "ice_thickness"
+    name = "ice_thickness"
     _long_name = "sea_ice_thickness"
     _standard_name = "sea_ice_thickness"
     _unit = ureg.m
-

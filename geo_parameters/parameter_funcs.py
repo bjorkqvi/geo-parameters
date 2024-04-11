@@ -16,7 +16,7 @@ def list_of_parameters() -> list:
 
 def dict_of_parameters(short: bool = False, alias: bool = False) -> dict:
     if short:
-        return {c.short_name(): c for c in list_of_parameters()}
+        return {c.name: c for c in list_of_parameters()}
     return {c.standard_name(alias=alias): c for c in list_of_parameters()}
 
 
@@ -35,6 +35,3 @@ def create_parameter_dict(parameter_strings: list[str]):
         if val is not None:
             metaparameter_dict[param] = val
     return metaparameter_dict
-
-
-

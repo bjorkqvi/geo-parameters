@@ -8,12 +8,7 @@ class MetaParameter(ABC):
     _cf = True
 
     def __init__(self, name: str = ""):
-        self._name = name or self.short_name()
-
-    @staticmethod
-    @abstractmethod
-    def _short_name() -> str:
-        pass
+        self.name = name or self.name
 
     @staticmethod
     @abstractmethod
@@ -33,10 +28,6 @@ class MetaParameter(ABC):
     @classmethod
     def cf(cls) -> bool:
         return cls._cf
-
-    @classmethod
-    def short_name(cls) -> str:
-        return cls._short_name
 
     @classmethod
     def long_name(cls) -> str:
@@ -63,19 +54,8 @@ class MetaParameter(ABC):
     def unit(cls) -> Unit:
         return cls._unit
 
-    def __repr__(self):
-        return self.name()
-
     def quantify(self):
         return self * self.unit()
-
-    def set_name(self, name: str = None) -> None:
-        if name is None:
-            self._name = self.short_name()
-        self._name = name
-
-    def name(self) -> str:
-        return self._name or self.short_name()
 
     @classmethod
     def cf(cls) -> str:
@@ -84,7 +64,7 @@ class MetaParameter(ABC):
     @classmethod
     def meta_dict(cls, alias: bool = False) -> dict:
         return {
-            "short_name": cls.short_name(),
+            "short_name": cls.name,
             "long_name": cls.long_name(),
             "standard_name": cls.standard_name(alias=alias),
             "unit": str(cls.unit()),

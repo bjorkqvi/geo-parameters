@@ -15,28 +15,22 @@ These classes have information about the parameter:
 Hs.standard_name()
 'sea_surface_wave_significant_height'
 ```
-Every parameters has a pre-defined short_name
+Every parameters has a pre-defined name
 
 ```python
-Hs.short_name()
+Hs.name
 'hs'
 ```
 If you want to define some other names for the parameters, then you can create an instance. By default the name of the instance is the short name, but this can be changed:
 
 ```python
 hsig = Hs()
-hsig.name()
+hsig.name
 'hs'
 
 hsig = Hs(name='hsig')
-hsig.name()
+hsig.name
 'hsig'
-```
-
-The string value of an instant is also the name, so the instance can conveniently be used almost interchangeably with string identifiers
-
-```python
-assert str(Hs(name='hsig')) == str('hsig')
 ```
 
 
@@ -107,11 +101,10 @@ If an xarray Dataset has standard_name attributes, the correct key can be found 
 ```python
 ds
 <xarray.Dataset> Size: 1kB
-Dimensions:              (lat: 11, lont: 6, lon: 6)
+Dimensions:              (lat: 11, lon: 6)
 Coordinates:
   * lon                  (lon) float64 48B 5.0 6.0 7.0 8.0 9.0 10.0
   * lat                  (lat) float64 88B 50.0 51.0 52.0 ... 58.0 59.0 60.0
-Dimensions without coordinates: lont
 Data variables:
     interesting_hs_name  (lat, lon) float64 528B 0.0 0.0 0.0 ... 0.0 0.0 0.0
     peak_period          (lat, lon) float64 528B 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0

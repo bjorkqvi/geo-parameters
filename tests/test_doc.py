@@ -5,13 +5,12 @@ from geo_parameters import dict_of_parameters
 
 def test_names():
     assert Hs.standard_name() == "sea_surface_wave_significant_height"
-    assert Hs.short_name() == "hs"
+    assert Hs.name == "hs"
     hsig = Hs()
-    assert hsig.name() == "hs"
+    assert hsig.name == "hs"
 
     hsig = Hs(name="hsig")
-    assert hsig.name() == "hsig"
-    assert str(Hs(name="hsig")) == str("hsig")
+    assert hsig.name == "hsig"
 
     assert hsig.standard_name() == "sea_surface_wave_significant_height"
     assert hsig.long_name() == "significant_wave_height"
