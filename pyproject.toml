@@ -1,6 +1,6 @@
 [project]
 name = "geo-parameters"
-version = "0.2.2"
+version = "0.2.3"
 description = "Metadata of geophysical (especially wave) parameters"
 authors = [ { name = "Jan-Victor Björkqvist", email = "janvb@met.no" } ]
 dependencies = [ "numpy", "pint" ]
