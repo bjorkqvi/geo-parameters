@@ -34,14 +34,14 @@ class HsSwell1(MetaParameter):
 
 
 class HsSwell2(MetaParameter):
-    name = "hs_swell12"
+    name = "hs_swell2"
     _long_name = "significant_secondary_swell_height"
     _standard_name = "sea_surface_secondary_swell_wave_significant_height"
     _unit = ureg.m
 
 
 class HsSwell3(MetaParameter):
-    name = "hs_swell13"
+    name = "hs_swell3"
     _long_name = "significant_tertiary_swell_height"
     _standard_name = "sea_surface_tertiary_swell_wave_significant_height"
     _unit = ureg.m
@@ -224,6 +224,13 @@ class Dirm(MetaParameter):
     _unit = ureg.deg
 
 
+class DirmTo(MetaParameter):
+    name = "dirm"
+    _long_name = "mean_wave_direction"
+    _standard_name = "sea_surface_wave_to_direction"
+    _unit = ureg.deg
+
+
 class Dirp(MetaParameter):
     name = "dirp"
     _long_name = "peak_wave_direction"
@@ -233,10 +240,30 @@ class Dirp(MetaParameter):
     _unit = ureg.deg
 
 
+class DirpTo(MetaParameter):
+    name = "dirp"
+    _long_name = "peak_wave_direction"
+    _standard_name = (
+        "sea_surface_wave_to_direction_at_variance_spectral_density_maximum"
+    )
+    _unit = ureg.deg
+    _cf = False
+
+
 class DirmSwell(MetaParameter):
     name = "dirm_swell"
     _long_name = "mean_swell_direction"
     _standard_name = "sea_surface_swell_wave_from_direction"
+    _unit = ureg.deg
+
+
+class DirmSwellTo(MetaParameter):
+    name = "dirm_swell"
+    _long_name = "mean_swell_direction"
+    _standard_name = [
+        "sea_surface_swell_wave_to_direction",
+        "direction_of_swell_wave_velocity",
+    ]
     _unit = ureg.deg
 
 
@@ -249,10 +276,123 @@ class DirpSwell(MetaParameter):
     _unit = ureg.deg
 
 
+class DirpSwellTo(MetaParameter):
+    name = "dirp_swell"
+    _long_name = "peak_swell_direction"
+    _standard_name = (
+        "sea_surface_swell_wave_to_direction_at_variance_spectral_density_maximum"
+    )
+    _unit = ureg.deg
+    _cf = False
+
+
+class DirmSwell1(MetaParameter):
+    name = "dirm_swell1"
+    _long_name = "mean_primary_swell_direction"
+    _standard_name = "sea_surface_primary_swell_wave_from_direction"
+    _unit = ureg.deg
+
+
+class DirmSwell1To(MetaParameter):
+    name = "dirm_swell1"
+    _long_name = "mean_primary_swell_direction"
+    _standard_name = "sea_surface_primary_swell_wave_to_direction"
+
+    _unit = ureg.deg
+    _cf = False
+
+
+class DirpSwell1(MetaParameter):
+    name = "dirp_swell1"
+    _long_name = "peak_primary_swell_direction"
+    _standard_name = "sea_surface_primary_swell_wave_from_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+
+
+class DirpSwell1To(MetaParameter):
+    name = "dirp_swell1"
+    _long_name = "peak_primary_swell_direction"
+    _standard_name = "sea_surface_primary_swell_wave_to_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+    _cf = False
+
+
+class DirmSwell2(MetaParameter):
+    name = "dirm_swell2"
+    _long_name = "mean_secondary_swell_direction"
+    _standard_name = "sea_surface_secondary_swell_wave_from_direction"
+    _unit = ureg.deg
+
+
+class DirmSwell2To(MetaParameter):
+    name = "dirm_swell2"
+    _long_name = "mean_secondary_swell_direction"
+    _standard_name = "sea_surface_secondary_swell_wave_to_direction"
+
+    _unit = ureg.deg
+    _cf = False
+
+
+class DirpSwell2(MetaParameter):
+    name = "dirp_swell2"
+    _long_name = "peak_secondary_swell_direction"
+    _standard_name = "sea_surface_secondary_swell_wave_from_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+
+
+class DirpSwell2To(MetaParameter):
+    name = "dirp_swell2"
+    _long_name = "peak_secondary_swell_direction"
+    _standard_name = "sea_surface_secondary_swell_wave_to_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+    _cf = False
+
+
+class DirmSwell3(MetaParameter):
+    name = "dirm_swell3"
+    _long_name = "mean_tertiary_swell_direction"
+    _standard_name = "sea_surface_tertiary_swell_wave_from_direction"
+    _unit = ureg.deg
+
+
+class DirmSwell3To(MetaParameter):
+    name = "dirm_swell3"
+    _long_name = "mean_tertiary_swell_direction"
+    _standard_name = "sea_surface_tertiary_swell_wave_to_direction"
+
+    _unit = ureg.deg
+    _cf = False
+
+
+class DirpSwell3(MetaParameter):
+    name = "dirp_swell3"
+    _long_name = "peak_tertiary_swell_direction"
+    _standard_name = "sea_surface_tertiary_swell_wave_from_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+
+
+class DirpSwell3To(MetaParameter):
+    name = "dirp_swell3"
+    _long_name = "peak_tertiary_swell_direction"
+    _standard_name = "sea_surface_tertiary_swell_wave_to_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+    _cf = False
+
+
 class DirmSea(MetaParameter):
     name = "dirm_sea"
     _long_name = "mean_wind_sea_direction"
     _standard_name = "sea_surface_wind_wave_from_direction"
+    _unit = ureg.deg
+
+
+class DirmSeaTo(MetaParameter):
+    name = "dirm_sea"
+    _long_name = "mean_wind_sea_direction"
+    _standard_name = [
+        "sea_surface_wind_wave_to_direction",
+        "direction_of_wind_wave_velocity",
+    ]
     _unit = ureg.deg
 
 
@@ -265,6 +405,17 @@ class DirpSea(MetaParameter):
     _unit = ureg.deg
 
 
+class DirpSeaTo(MetaParameter):
+    name = "dirp_sea"
+    _long_name = "peak_wind_sea_direction"
+    _standard_name = (
+        "sea_surface_wind_wave_to_direction_at_variance_spectral_density_maximum"
+    )
+    _unit = ureg.deg
+    _cf = False
+
+
+## Spreading
 class Spr(MetaParameter):
     name = "spr"
     _long_name = "wave_directional_spread"
@@ -295,6 +446,52 @@ class SprPSwell(MetaParameter):
         "sea_surface_swell_wave_from_direction_at_variance_spectral_density_maximum"
     )
     _unit = ureg.deg
+    _cf = False
+
+
+class SprSwell1(MetaParameter):
+    name = "spr_swell1"
+    _long_name = "primary_swell_directional_spread"
+    _standard_name = "sea_surface_primary_swell_wave_directional_spread"
+    _unit = ureg.deg
+
+
+class SprPSwell1(MetaParameter):
+    name = "sprp_swell1"
+    _long_name = "peak_primary_swell_directional_spread"
+    _standard_name = "sea_surface_primary_swell_wave_from_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+    _cf = False
+
+
+class SprSwell2(MetaParameter):
+    name = "spr_swell2"
+    _long_name = "secondary_swell_directional_spread"
+    _standard_name = "sea_surface_scondary_swell_wave_directional_spread"
+    _unit = ureg.deg
+
+
+class SprPSwell2(MetaParameter):
+    name = "sprp_swell2"
+    _long_name = "peak_secondary_swell_directional_spread"
+    _standard_name = "sea_surface_secondary_swell_wave_from_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+    _cf = False
+
+
+class SprSwell3(MetaParameter):
+    name = "spr_swell3"
+    _long_name = "tertiary_swell_directional_spread"
+    _standard_name = "sea_surface_tertiary_swell_wave_directional_spread"
+    _unit = ureg.deg
+
+
+class SprPSwell3(MetaParameter):
+    name = "sprp_swell3"
+    _long_name = "peak_tertiary_swell_directional_spread"
+    _standard_name = "sea_surface_tertiary_swell_wave_from_direction_at_variance_spectral_density_maximum"
+    _unit = ureg.deg
+    _cf = False
 
 
 class SprSea(MetaParameter):
@@ -311,6 +508,7 @@ class SprPSea(MetaParameter):
         "sea_surface_wind_wave_from_direction_at_variance_spectral_density_maximum"
     )
     _unit = ureg.deg
+    _cf = False
 
 
 ## Spectral
@@ -326,6 +524,34 @@ class Efth(MetaParameter):
     _long_name = "directional_spectral_density"
     _standard_name = "sea_surface_wave_directional_variance_spectral_density"
     _unit = ureg.m * ureg.m * ureg.s / ureg.rad
+
+
+class Fk(MetaParameter):
+    name = "fk"
+    _long_name = "wavenumer_spectral_density"
+    _standard_name = "sea_surface_wave_variance_spectral_density"
+    _unit = ureg.m * ureg.m * ureg.m
+
+
+class Fkth(MetaParameter):
+    name = "fkth"
+    _long_name = "directional_wavenumber_spectral_density"
+    _standard_name = "sea_surface_wave_directional_variance_spectral_density"
+    _unit = ureg.m * ureg.m * ureg.m / ureg.rad
+
+
+class Qv(MetaParameter):
+    name = "qv"
+    _long_name = "inverse_phase_speed_spectral_density"
+    _standard_name = "sea_surface_wave_variance_spectral_density"
+    _unit = ureg.m * ureg.m * ureg.m * ureg.s
+
+
+class Qvth(MetaParameter):
+    name = "qvth"
+    _long_name = "directional_inverse_phase_speed_spectral_density"
+    _standard_name = "sea_surface_wave_directional_variance_spectral_density"
+    _unit = ureg.m * ureg.m * ureg.m * ureg.s / ureg.rad
 
 
 class Freq(MetaParameter):
@@ -347,6 +573,57 @@ class DirsTo(MetaParameter):
     _long_name = "wave_direction"
     _standard_name = "sea_surface_wave_to_direction"
     _unit = ureg.deg
+
+
+##Stokes
+class EastStokes(MetaParameter):
+    name = "usx"
+    _long_name = "stokes_east_component"
+    _standard_name = "sea_surface_wave_stokes_drift_eastward_velocity"
+    _unit = ureg.m / ureg.s
+
+
+class NorthStokes(MetaParameter):
+    name = "usy"
+    _long_name = "stokes_north_component"
+    _standard_name = "sea_surface_wave_stokes_drift_northward_velocity"
+    _unit = ureg.m / ureg.s
+
+
+class XStokes(MetaParameter):
+    name = "usx"
+    _long_name = "stokes_x_component"
+    _standard_name = "sea_surface_wave_stokes_drift_x_velocity"
+    _unit = ureg.m / ureg.s
+
+
+class YStokes(MetaParameter):
+    name = "usy"
+    _long_name = "stokes_y_component"
+    _standard_name = "sea_surface_wave_stokes_drift_y_velocity"
+    _unit = ureg.m / ureg.s
+
+
+class Stokes(MetaParameter):
+    name = "us"
+    _long_name = "stokes_drift"
+    _standard_name = "sea_surface_wave_stokes_drift_speed"
+    _unit = ureg.m / ureg.s
+
+
+class StokesDir(MetaParameter):
+    name = "us_dir"
+    _long_name = "stokes_direction"
+    _standard_name = "sea_surface_wave_stokes_drift_to_direction"
+    _unit = ureg.deg
+
+
+class StokesDirFrom(MetaParameter):
+    name = "us_dir"
+    _long_name = "stokes_direction"
+    _standard_name = "sea_surface_wave_stokes_drift_from_direction"
+    _unit = ureg.deg
+    _cf = False
 
 
 ## Moments (non-standard)

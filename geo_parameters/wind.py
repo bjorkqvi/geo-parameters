@@ -38,6 +38,11 @@ class WindDir(MetaParameter):
     _standard_name = "wind_from_direction"
     _unit = ureg.deg
 
+class WindDirTo(MetaParameter):
+    name = "wind_dir"
+    _long_name = "wind_direction"
+    _standard_name = "wind_to_direction"
+    _unit = ureg.deg
 
 class XGust(MetaParameter):
     name = "x_gust"
@@ -65,3 +70,10 @@ class GustDir(MetaParameter):
     _long_name = "wind_gust_direction"
     _standard_name = "wind_gust_from_direction"
     _unit = ureg.deg
+    
+class GustDirTo(MetaParameter):
+    name = "gust_dir"
+    _long_name = "wind_gust_direction"
+    _standard_name = "wind_gust_to_direction"
+    _unit = ureg.deg
+    _cf = False
