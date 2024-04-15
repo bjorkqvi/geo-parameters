@@ -1,10 +1,5 @@
-from .metaparameter import MetaParameter
-import pint
-
-ureg = pint.UnitRegistry()
-
-ureg.default_format = "~C"
-
+from geo_parameters.metaparameter import MetaParameter
+from geo_parameters.ureg import ureg
 
 class WaterDepth(MetaParameter):
     name = "depth"
