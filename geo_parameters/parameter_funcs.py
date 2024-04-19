@@ -27,14 +27,12 @@ def dict_of_parameters(short: bool = False, alias: bool = False) -> dict:
 
 def shortget(key: str):
     """Find a geo-parameter based on a short string. Warning, these short strings follow no standard convention."""
-    return dict_of_parameters().get(key)
+    return dict_of_parameters(short=True).get(key)
 
 
 def get(key: str):
     """Find a geo-parameter based on a string of the standard_name (or an alias)."""
-    return dict_of_parameters(alias=True).get(key) or dict_of_parameters(
-        short=True
-    ).get(key)
+    return dict_of_parameters().get(key) or dict_of_parameters(alias=True).get(key)
 
 
 def create_parameter_dict(parameter_strings: list[str]):

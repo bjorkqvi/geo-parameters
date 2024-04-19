@@ -3,6 +3,7 @@ from .parameter_funcs import (
     dict_of_parameters,
     create_parameter_dict,
     get,
+    shortget,
     is_gp,
     is_gp_instance,
     is_gp_class,
