@@ -1,6 +1,7 @@
 from geo_parameters.metaparameter import MetaParameter
 from geo_parameters.ureg import ureg
 
+
 ## Wave heights
 class Hs(MetaParameter):
     name = "hs"
@@ -79,6 +80,40 @@ class Hs110(MetaParameter):
     _long_name = "highest_tenth_wave_heigh"
     _standard_name = "sea_surface_wave_mean_height_of_highest_tenth"
     _unit = ureg.m
+
+
+## Wave frequencies
+class Fp(MetaParameter):
+    name = "fp"
+    _long_name = "peak_wave_frequency"
+    _standard_name = "sea_surface_wave_frequency_at_variance_spectral_density_maximum"
+    _unit = ureg.s**-1
+
+
+class Fm(MetaParameter):
+    name = "fm"
+    _long_name = "mean_wave_frequency"
+    _standard_name = "sea_surface_wave_mean_frequency"
+    _unit = ureg.s**-1
+    _cf = False
+
+
+class Wp(MetaParameter):
+    name = "Wp"
+    _long_name = "peak_angular_wave_frequency"
+    _standard_name = (
+        "sea_surface_angular_wave_frequency_at_variance_spectral_density_maximum"
+    )
+    _unit = ureg.rad * ureg.s**-1
+    _cf = False
+
+
+class Wm(MetaParameter):
+    name = "Wm"
+    _long_name = "mean_angular_wave_frequency"
+    _standard_name = "sea_surface_angular_wave_mean_frequency"
+    _unit = ureg.rad * ureg.s**-1
+    _cf = False
 
 
 ## Wave periods
