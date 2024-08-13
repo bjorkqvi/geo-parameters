@@ -1,6 +1,7 @@
 from geo_parameters.metaparameter import MetaParameter
 from geo_parameters.ureg import ureg
 
+
 class WaterDepth(MetaParameter):
     name = "depth"
     _long_name = "water_depth"
@@ -37,6 +38,34 @@ class YCurrent(MetaParameter):
         "y_sea_water_velocity",
     ]
     _unit = ureg.m / ureg.s
+
+
+class Current(MetaParameter):
+    name = "current"
+    _long_name = "current_speed"
+    _standard_name = "sea_water_speed"
+    _unit = ureg.m / ureg.s
+
+
+class CurrentDir(MetaParameter):
+    name = "current_dir"
+    _long_name = "current_direction"
+    _standard_name = [
+        "sea_water_velocity_to_direction",
+        "sea_water_to_direction",
+        "direction_of_sea_water_velocity",
+    ]
+    _unit = ureg.deg
+
+
+class CurrentFromDir(MetaParameter):
+    name = "current_dir"
+    _long_name = "current_direction"
+    _standard_name = [
+        "sea_water_velocity_from_direction",
+        "sea_water_from_direction",
+    ]
+    _unit = ureg.deg
 
 
 class IceFraction(MetaParameter):
