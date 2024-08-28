@@ -595,15 +595,17 @@ class Freq(MetaParameter):
 class DirsFrom(MetaParameter):
     name = "dirs"
     _long_name = "wave_direction"
-    _standard_name = "sea_surface_wave_from_direction"
+    _standard_name = "wave_from_direction"
     _unit = ureg.deg
+    _cf = False
 
 
 class DirsTo(MetaParameter):
     name = "dirs"
     _long_name = "wave_direction"
-    _standard_name = "sea_surface_wave_to_direction"
+    _standard_name = "wave_to_direction"
     _unit = ureg.deg
+    _cf = False
 
 
 ##Stokes
