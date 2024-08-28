@@ -47,7 +47,7 @@ class MetaParameter(ABC):
     def standard_aliases(cls, strict=False) -> list[str]:
         """Returns a list of all aliases, possible a list of only one name"""
         if cls.cf() or not strict:
-            if isintance(cls._standard_name, list):
+            if isinstance(cls._standard_name, list):
                 return cls._standard_name
             else:
                 return [cls._standard_name]
