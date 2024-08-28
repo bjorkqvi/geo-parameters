@@ -13,3 +13,11 @@ def test_decode():
 
     with pytest.raises(TypeError):
         gp.decode(1)
+
+
+def test_decode_init():
+    var, param = gp.decode(gp.wave.Hs)
+    assert gp.is_gp_class(param)
+
+    var, param = gp.decode(gp.wave.Hs, init=True)
+    assert gp.is_gp_instance(param)

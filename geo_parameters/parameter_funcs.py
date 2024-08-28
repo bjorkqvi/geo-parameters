@@ -45,11 +45,13 @@ def create_parameter_dict(parameter_strings: list[str]):
     return metaparameter_dict
 
 
-def decode(parameter) -> tuple[str, MetaParameter]:
+def decode(parameter, init: bool = False) -> tuple[str, MetaParameter]:
     """Returns the name of the geo-parameter and the geo-parameter.
     It a string is given, the string and None is returned.
     Otherwise an error is thrown"""
     if is_gp(parameter):
+        if init and is_gp_class(parameter):
+            parameter = parameter()
         return parameter.name, parameter
     elif isinstance(parameter, str):
         return parameter, None
