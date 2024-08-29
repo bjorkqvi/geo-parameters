@@ -226,6 +226,13 @@ class TpSwell3(MetaParameter):
     _unit = ureg.s
 
 
+class TpSea(MetaParameter):
+    name = "tp_sea"
+    _long_name = "peak_wave_period_of_wind_sea"
+    _standard_name = "sea_surface_wind_wave_period_at_variance_spectral_density_maximum"
+    _unit = ureg.s
+
+
 class Tm01Sea(MetaParameter):
     name = "tm01_sea"
     _long_name = "first_moment_mean_wave_period_of_wind_sea"
