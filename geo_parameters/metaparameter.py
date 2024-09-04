@@ -38,8 +38,8 @@ class MetaParameter(ABC):
         names = np.atleast_1d(cls._standard_name)
         if cls.cf() or not strict:
             if alias:
-                return names[-1]
-            return names[0]
+                return str(names[-1])
+            return str(names[0])
 
         return ""
 
