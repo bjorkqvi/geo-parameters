@@ -1,5 +1,21 @@
-# geo-parameters
+# Geo-parameters
+[![Tests (python)](https://github.com/bjorkqvi/geo-parameters/actions/workflows/tests.yml/badge.svg)](https://github.com/bjorkqvi/geo-parameters/actions/workflows/tests.yml)
+
 Metadata of geophysical (especially wave) parameters. The main idea is to be able to use standard CF-names without having to remember or check the names.
+
+# Quick Installation
+
+To get started with geo-parameters, you can install it with pip or conda:
+
+```shell
+$ pip install geo-parameters
+```
+
+or
+
+```shell
+$ conda install conda-forge geo-parameters
+```
 
 ## Names of parameters
 
