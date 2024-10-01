@@ -85,3 +85,12 @@ class MetaParameter(ABC):
                     return var
 
         return None
+
+    @classmethod
+    def dir_type(cls) -> str:
+        for std_name in cls.standard_aliases():
+            if "to_direction" in std_name:
+                return "to"
+            if "from_direction" in std_name:
+                return "from"
+        return None

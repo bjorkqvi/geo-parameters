@@ -58,7 +58,7 @@ class CurrentDir(MetaParameter):
     _unit = ureg.deg
 
 
-class CurrentFromDir(MetaParameter):
+class CurrentDirFrom(MetaParameter):
     name = "current_dir"
     _long_name = "current_direction"
     _standard_name = [
