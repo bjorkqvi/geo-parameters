@@ -4,7 +4,6 @@ version = "0.4.7"
 description = "Metadata of geophysical (especially wave) parameters"
 authors = [ { name = "Jan-Victor Björkqvist", email = "janvb@met.no" } ]
 dependencies = [ "numpy", "pint" ]
-readme = "README.md"
 
 #[project.optional-dependencies]
 #tests = [ "numpy", "xarray", "pandas", "utm", "geopy"]
