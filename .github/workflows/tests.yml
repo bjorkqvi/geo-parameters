@@ -21,7 +21,7 @@ jobs:
         python-version: [ '3.9', '3.10', '3.11' ]
     steps:
       - uses: actions/checkout@v4
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: conda-incubator/setup-miniconda@v3
         with:
           environment-file: environment.yml
           python-version: ${{ matrix.python-version }}
@@ -55,7 +55,7 @@ jobs:
       - uses: actions/download-artifact@v4.1.7
         with:
           name: wheels
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: '3.9'
           miniforge-version: latest
