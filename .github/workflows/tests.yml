@@ -10,7 +10,7 @@ on:
 
 jobs:
   tests:
-    name: pytests (${{ matrix.os }} - ${{ matrix.python-version }}, Miniforge)
+    name: pytests (${{ matrix.os }} - ${{ matrix.python-version }}, Miniforge3)
     runs-on: ${{ matrix.os }}-latest
     defaults:
       run:
@@ -26,7 +26,7 @@ jobs:
           environment-file: environment.yml
           python-version: ${{ matrix.python-version }}
           miniforge-version: latest
-          miniforge-variant: Miniforge
+          miniforge-variant: Miniforge3
       - name: Run tests
         run: |
           conda activate test
@@ -59,7 +59,7 @@ jobs:
         with:
           python-version: '3.9'
           miniforge-version: latest
-          miniforge-variant: Miniforge
+          miniforge-variant: Miniforge3
       - name: Publish to PyPi
         env:
           TWINE_USERNAME: __token__
