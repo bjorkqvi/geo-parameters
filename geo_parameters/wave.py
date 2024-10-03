@@ -599,6 +599,14 @@ class Freq(MetaParameter):
     _unit = ureg.s**-1
 
 
+class Dirs(MetaParameter):
+    name = "dirs"
+    _long_name = "wave_direction"
+    _standard_name = "wave_direction"
+    _unit = ureg.deg
+    _cf = False
+
+
 class DirsFrom(MetaParameter):
     name = "dirs"
     _long_name = "wave_direction"
