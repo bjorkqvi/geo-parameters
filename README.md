@@ -142,9 +142,13 @@ Attributes:
 
 ```python
 Hs.find_me_in_ds(ds)
-'interesting_hs_name'
+['interesting_hs_name']
 
 Tp.find_me_in_ds(ds)
+['peak_period']
+
+Tp.find_me_in_ds(ds, return_first=True)
 'peak_period'
+
 ```
 
