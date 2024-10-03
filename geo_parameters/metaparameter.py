@@ -75,16 +75,38 @@ class MetaParameter(ABC):
         }
 
     @classmethod
-    def find_me_in_ds(cls, ds) -> Union[str, None]:
-        """Takes an Xarray Dataset and returns name of variable that matches the parameter based on standard_name"""
+    def find_me_in_ds(
+        cls, ds, return_first: bool = False
+    ) -> Union[list[str], str, None]:
+        """Takes an Xarray Dataset and returns list of all variable names that matches the parameter based on standard_name
+
+        If return_first = True, then returns first name as a sting"""
         data_vars = list(ds.data_vars)
+        coords = list(ds.coords)
+
+        if not return_first:
+            vars = []
 
         for var in data_vars:
             if hasattr(ds.get(var), "standard_name"):
                 if ds.get(var).standard_name in cls.standard_aliases():
-                    return var
+                    if return_first:
+                        return var
+                    else:
+                        vars.append(var)
 
-        return None
+        for var in coords:
+            if hasattr(ds.get(var), "standard_name"):
+                if ds.get(var).standard_name in cls.standard_aliases():
+                    if return_first:
+                        return var
+                    else:
+                        vars.append(var)
+
+        if return_first:
+            return None
+        else:
+            return vars
 
     @classmethod
     def dir_type(cls) -> str:
