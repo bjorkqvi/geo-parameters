@@ -61,8 +61,8 @@ class HsIG(MetaParameter):
     _unit = ureg.m
 
 
-class HsMax(MetaParameter):
-    name = "hs_max"
+class HMax(MetaParameter):
+    name = "hmax"
     _long_name = "maximum_wave_heigh"
     _standard_name = "sea_surface_wave_maximum_height"
     _unit = ureg.m
