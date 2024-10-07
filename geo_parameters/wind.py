@@ -1,6 +1,7 @@
 from geo_parameters.metaparameter import MetaParameter
 from geo_parameters.ureg import ureg
 
+
 class XWind(MetaParameter):
     name = "x_wind"
     _long_name = "x_wind_component"
@@ -22,23 +23,25 @@ class YWind(MetaParameter):
 
 
 class Wind(MetaParameter):
-    name = "wind"
+    name = "ff"
     _long_name = "wind_speed"
     _standard_name = "wind_speed"
     _unit = ureg.m / ureg.s
 
 
 class WindDir(MetaParameter):
-    name = "wind_dir"
+    name = "dd"
     _long_name = "wind_direction"
     _standard_name = "wind_from_direction"
     _unit = ureg.deg
 
+
 class WindDirTo(MetaParameter):
-    name = "wind_dir"
+    name = "dd"
     _long_name = "wind_direction"
     _standard_name = "wind_to_direction"
     _unit = ureg.deg
+
 
 class XGust(MetaParameter):
     name = "x_gust"
@@ -66,7 +69,8 @@ class GustDir(MetaParameter):
     _long_name = "wind_gust_direction"
     _standard_name = "wind_gust_from_direction"
     _unit = ureg.deg
-    
+
+
 class GustDirTo(MetaParameter):
     name = "gust_dir"
     _long_name = "wind_gust_direction"

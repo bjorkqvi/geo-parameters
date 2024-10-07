@@ -99,7 +99,7 @@ class Fm(MetaParameter):
 
 
 class Wp(MetaParameter):
-    name = "Wp"
+    name = "wp"
     _long_name = "peak_angular_wave_frequency"
     _standard_name = (
         "sea_surface_angular_wave_frequency_at_variance_spectral_density_maximum"
@@ -109,7 +109,7 @@ class Wp(MetaParameter):
 
 
 class Wm(MetaParameter):
-    name = "Wm"
+    name = "wm"
     _long_name = "mean_angular_wave_frequency"
     _standard_name = "sea_surface_angular_wave_mean_frequency"
     _unit = ureg.rad * ureg.s**-1
@@ -625,49 +625,49 @@ class DirsTo(MetaParameter):
 
 ##Stokes
 class EastStokes(MetaParameter):
-    name = "usx"
-    _long_name = "stokes_east_component"
+    name = "x_stokes"
+    _long_name = "east_stokes_component"
     _standard_name = "sea_surface_wave_stokes_drift_eastward_velocity"
     _unit = ureg.m / ureg.s
 
 
 class NorthStokes(MetaParameter):
-    name = "usy"
-    _long_name = "stokes_north_component"
+    name = "y_stokes"
+    _long_name = "north_stokes_component"
     _standard_name = "sea_surface_wave_stokes_drift_northward_velocity"
     _unit = ureg.m / ureg.s
 
 
 class XStokes(MetaParameter):
-    name = "usx"
-    _long_name = "stokes_x_component"
+    name = "x_stokes"
+    _long_name = "x_stokes_component"
     _standard_name = "sea_surface_wave_stokes_drift_x_velocity"
     _unit = ureg.m / ureg.s
 
 
 class YStokes(MetaParameter):
-    name = "usy"
-    _long_name = "stokes_y_component"
+    name = "y_stokes"
+    _long_name = "y_stokes_component"
     _standard_name = "sea_surface_wave_stokes_drift_y_velocity"
     _unit = ureg.m / ureg.s
 
 
 class Stokes(MetaParameter):
-    name = "us"
+    name = "stokes"
     _long_name = "stokes_drift"
     _standard_name = "sea_surface_wave_stokes_drift_speed"
     _unit = ureg.m / ureg.s
 
 
 class StokesDir(MetaParameter):
-    name = "us_dir"
+    name = "stokes_dir"
     _long_name = "stokes_direction"
     _standard_name = "sea_surface_wave_stokes_drift_to_direction"
     _unit = ureg.deg
 
 
 class StokesDirFrom(MetaParameter):
-    name = "us_dir"
+    name = "stokes_dir"
     _long_name = "stokes_direction"
     _standard_name = "sea_surface_wave_stokes_drift_from_direction"
     _unit = ureg.deg
