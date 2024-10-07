@@ -3,6 +3,8 @@ import numpy as np
 from typing import Union
 from pint import Unit
 
+from .relationships import RELATIONSHIPS
+
 
 class MetaParameter(ABC):
     _cf = True
@@ -107,6 +109,30 @@ class MetaParameter(ABC):
             return None
         else:
             return vars
+
+    @classmethod
+    def i_am(cls) -> str:
+        """Finds what role this parameter has in a possible relationship to other parameters.
+        Roles are: 'x', 'y', 'mag', 'dir'
+        """
+        if cls.my_family() is None:
+            return None
+        for key, value in cls.my_family().items():
+            if cls.is_same(value):
+                return key
+        return None
+
+    @classmethod
+    def is_same(cls, gp) -> bool:
+        """Compares name of parameter and standard_name and returns true if they match"""
+        try:
+            gp = gp()
+        except TypeError:
+            pass
+
+        type_match = type(cls()).__name__ == type(gp).__name__
+        std_name_match = cls.standard_name() == gp.standard_name()
+        return type_match and std_name_match
 
     @classmethod
     def dir_type(cls) -> str:

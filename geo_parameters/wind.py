@@ -1,8 +1,26 @@
 from geo_parameters.metaparameter import MetaParameter
 from geo_parameters.ureg import ureg
 
+from .relationships import RELATIONSHIPS
 
-class XWind(MetaParameter):
+
+class WindParameter(MetaParameter):
+    @classmethod
+    def my_family(cls):
+        """Returns the dictonary containing the parameters where cls is in"""
+        for rel in RELATIONSHIPS:
+            for param in rel.values():
+                if type(cls()).__name__ == param:
+                    # This needs to be done to circument circular imports etc
+                    eval_rel = {}
+                    for key, value in rel.items():
+                        eval_rel[key] = eval(value)
+                    return eval_rel
+
+        return None
+
+
+class XWind(WindParameter):
     name = "x_wind"
     _long_name = "x_wind_component"
     _standard_name = [
@@ -12,7 +30,7 @@ class XWind(MetaParameter):
     _unit = ureg.m / ureg.s
 
 
-class YWind(MetaParameter):
+class YWind(WindParameter):
     name = "y_wind"
     _long_name = "y_wind_component"
     _standard_name = [
@@ -22,56 +40,56 @@ class YWind(MetaParameter):
     _unit = ureg.m / ureg.s
 
 
-class Wind(MetaParameter):
+class Wind(WindParameter):
     name = "ff"
     _long_name = "wind_speed"
     _standard_name = "wind_speed"
     _unit = ureg.m / ureg.s
 
 
-class WindDir(MetaParameter):
+class WindDir(WindParameter):
     name = "dd"
     _long_name = "wind_direction"
     _standard_name = "wind_from_direction"
     _unit = ureg.deg
 
 
-class WindDirTo(MetaParameter):
+class WindDirTo(WindParameter):
     name = "dd"
     _long_name = "wind_direction"
     _standard_name = "wind_to_direction"
     _unit = ureg.deg
 
 
-class XGust(MetaParameter):
+class XGust(WindParameter):
     name = "x_gust"
     _long_name = "x_gust_component"
     _standard_name = "x_wind_gust"
     _unit = ureg.m / ureg.s
 
 
-class YGust(MetaParameter):
+class YGust(WindParameter):
     name = "y_gust"
     _long_name = "y_gust_component"
     _standard_name = "y_wind_gust"
     _unit = ureg.m / ureg.s
 
 
-class Gust(MetaParameter):
+class Gust(WindParameter):
     name = "gust"
     _long_name = "wind_gust"
     _standard_name = "wind_speed_of_gust"
     _unit = ureg.m / ureg.s
 
 
-class GustDir(MetaParameter):
+class GustDir(WindParameter):
     name = "gust_dir"
     _long_name = "wind_gust_direction"
     _standard_name = "wind_gust_from_direction"
     _unit = ureg.deg
 
 
-class GustDirTo(MetaParameter):
+class GustDirTo(WindParameter):
     name = "gust_dir"
     _long_name = "wind_gust_direction"
     _standard_name = "wind_gust_to_direction"
