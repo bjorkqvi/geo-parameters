@@ -1,6 +1,18 @@
 from . import wave, ocean, wind
 import inspect
 from .metaparameter import MetaParameter
+from .wind import WindParameter
+from .wave import WaveParameter
+from .ocean import OceanParameter
+from .grid import GridParameter
+
+BaseParameters = [
+    MetaParameter,
+    WindParameter,
+    WaveParameter,
+    OceanParameter,
+    GridParameter,
+]
 
 
 def list_of_parameters() -> list:
@@ -10,7 +22,7 @@ def list_of_parameters() -> list:
     for module in modules_to_inspect:
         for __, obj in inspect.getmembers(module):
             if inspect.isclass(obj):
-                if issubclass(obj, MetaParameter) and not obj == MetaParameter:
+                if issubclass(obj, MetaParameter) and not obj in BaseParameters:
                     parameter_list.append(obj)
     return parameter_list
 

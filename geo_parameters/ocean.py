@@ -1,15 +1,32 @@
 from geo_parameters.metaparameter import MetaParameter
 from geo_parameters.ureg import ureg
+from .relationships import RELATIONSHIPS
 
 
-class WaterDepth(MetaParameter):
+class OceanParameter(MetaParameter):
+    @classmethod
+    def my_family(cls):
+        """Returns the dictonary containing the parameters where cls is in"""
+        for rel in RELATIONSHIPS:
+            for param in rel.values():
+                if type(cls()).__name__ == param:
+                    # This needs to be done to circument circular imports etc
+                    eval_rel = {}
+                    for key, value in rel.items():
+                        eval_rel[key] = eval(value)
+                    return eval_rel
+
+        return None
+
+
+class WaterDepth(OceanParameter):
     name = "depth"
     _long_name = "water_depth"
     _standard_name = "sea_floor_depth_below_sea_surface"
     _unit = ureg.m
 
 
-class SeaLevel(MetaParameter):
+class SeaLevel(OceanParameter):
     name = "eta"
     _long_name = "sea_surface_height"
     _standard_name = [
@@ -20,7 +37,7 @@ class SeaLevel(MetaParameter):
     _unit = ureg.m
 
 
-class XCurrent(MetaParameter):
+class XCurrent(OceanParameter):
     name = "x_current"
     _long_name = "eastward_current_component"
     _standard_name = [
@@ -30,7 +47,7 @@ class XCurrent(MetaParameter):
     _unit = ureg.m / ureg.s
 
 
-class YCurrent(MetaParameter):
+class YCurrent(OceanParameter):
     name = "y_current"
     _long_name = "northward_current_component"
     _standard_name = [
@@ -40,14 +57,14 @@ class YCurrent(MetaParameter):
     _unit = ureg.m / ureg.s
 
 
-class Current(MetaParameter):
+class Current(OceanParameter):
     name = "current"
     _long_name = "current_speed"
     _standard_name = "sea_water_speed"
     _unit = ureg.m / ureg.s
 
 
-class CurrentDir(MetaParameter):
+class CurrentDir(OceanParameter):
     name = "current_dir"
     _long_name = "current_direction"
     _standard_name = [
@@ -58,7 +75,7 @@ class CurrentDir(MetaParameter):
     _unit = ureg.deg
 
 
-class CurrentDirFrom(MetaParameter):
+class CurrentDirFrom(OceanParameter):
     name = "current_dir"
     _long_name = "current_direction"
     _standard_name = [
@@ -68,14 +85,14 @@ class CurrentDirFrom(MetaParameter):
     _unit = ureg.deg
 
 
-class IceFraction(MetaParameter):
+class IceFraction(OceanParameter):
     name = "ice_fraction"
     _long_name = "sea_ice_fraction"
     _standard_name = "sea_ice_area_fraction"
     _unit = ureg.percent
 
 
-class IceThickness(MetaParameter):
+class IceThickness(OceanParameter):
     name = "ice_thickness"
     _long_name = "sea_ice_thickness"
     _standard_name = "sea_ice_thickness"
