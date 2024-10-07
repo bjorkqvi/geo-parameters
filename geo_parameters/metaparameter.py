@@ -124,7 +124,14 @@ class MetaParameter(ABC):
 
     @classmethod
     def is_same(cls, gp) -> bool:
-        """Compares name of parameter and standard_name and returns true if they match"""
+        """Compares name of parameter and standard_name and returns true if they match
+
+        param = gp.wave.Hs
+        param.is_same(gp.wave.Hs) [True]
+        param.is_same(gp.wave.Hs()) [True]
+        param.is_same(gp.wave.Hs('other_name')) [True]
+        param.is_same(gp.wave.Hmax) [False]
+        """
         try:
             gp = gp()
         except TypeError:
