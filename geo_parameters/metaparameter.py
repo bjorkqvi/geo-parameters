@@ -57,11 +57,11 @@ class MetaParameter(ABC):
         return [""]
 
     @classmethod
-    def unit(cls) -> Unit:
+    def units(cls) -> Unit:
         return cls._unit
 
     def quantify(self):
-        return self * self.unit()
+        return self * self.units()
 
     @classmethod
     def cf(cls) -> str:
@@ -73,7 +73,7 @@ class MetaParameter(ABC):
             "short_name": cls.name,
             "long_name": cls.long_name(),
             "standard_name": cls.standard_name(alias=alias),
-            "unit": str(cls.unit()),
+            "units": str(cls.units()),
         }
 
     @classmethod
@@ -138,8 +138,11 @@ class MetaParameter(ABC):
             pass
 
         type_match = type(cls()).__name__ == type(gp).__name__
-        std_name_match = cls.standard_name() == gp.standard_name()
-        return type_match and std_name_match
+        try:
+            std_name_match = cls.standard_name() == gp.standard_name()
+            return type_match and std_name_match
+        except AttributeError:
+            return False
 
     @classmethod
     def dir_type(cls) -> str:

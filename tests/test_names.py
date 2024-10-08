@@ -9,7 +9,7 @@ def test_name_of_class():
 
 
 def test_units_of_class():
-    assert str(Hs.unit()) == "m"
+    assert str(Hs.units()) == "m"
 
 
 def test_name_of_instance():
@@ -24,4 +24,4 @@ def test_name_of_instance():
 
 
 def test_units_of_instance():
-    assert str(Hs().unit()) == "m"
+    assert str(Hs().units()) == "m"

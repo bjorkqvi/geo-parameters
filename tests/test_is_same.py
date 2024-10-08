@@ -21,3 +21,4 @@ def test_initialized_with_name():
 def test_not_same():
     assert not gp.wave.Hs.is_same(gp.wind.XWind)
     assert not gp.wave.Hs.is_same(gp.wave.Tp)
+    assert not gp.wave.Hs.is_same("hs")
