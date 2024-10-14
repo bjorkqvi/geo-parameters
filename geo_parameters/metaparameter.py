@@ -4,6 +4,7 @@ from typing import Union
 from pint import Unit
 
 from .relationships import RELATIONSHIPS
+from typing import Iterable
 
 
 class MetaParameter(ABC):
@@ -113,7 +114,9 @@ class MetaParameter(ABC):
     @classmethod
     def i_am(cls) -> str:
         """Finds what role this parameter has in a possible relationship to other parameters.
-        Roles are: 'x', 'y', 'mag', 'dir'
+        Roles are:
+        'x', 'y', 'mag', 'dir', 'opposite_dir'
+        'period', 'frequency', 'angular_frequency'
         """
         if cls.my_family() is None:
             return None
@@ -143,6 +146,23 @@ class MetaParameter(ABC):
             return type_match and std_name_match
         except AttributeError:
             return False
+
+    @classmethod
+    def is_in(cls, parameters: Iterable) -> bool:
+        """Checks if the parameter class is in (using .is_same()) in the list of provided parameters
+
+        Examples:
+        >> gp.wave.Hs.is_in([gp.wave.Hs, gp.wave.Tp]) -> True
+        >> gp.wave.Hs.is_in([gp.wave.Dirp, gp.wave.Tp]) -> False
+        >> gp.wave.Hs.is_in([]) -> False
+        >> gp.wave.Hs.is_in(['hs']) -> False
+        >> gp.wave.Hs.is_in([gp.wave.Hs(), 'hs']) -> True
+        """
+
+        for param in parameters:
+            if cls.is_same(param):
+                return True
+        return False
 
     @classmethod
     def dir_type(cls) -> str:

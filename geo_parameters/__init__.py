@@ -4,11 +4,9 @@ from .parameter_funcs import (
     create_parameter_dict,
     get,
     shortget,
-    is_gp,
-    is_gp_instance,
-    is_gp_class,
-    decode,
 )
+
+from .decoders import is_gp, is_gp_instance, is_gp_class, decode
 
 from . import wave, wind, ocean, grid
 from .ureg import ureg

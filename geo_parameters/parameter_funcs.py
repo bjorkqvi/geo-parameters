@@ -55,37 +55,3 @@ def create_parameter_dict(parameter_strings: list[str]):
         if val is not None:
             metaparameter_dict[param] = val
     return metaparameter_dict
-
-
-def decode(parameter, init: bool = False) -> tuple[str, MetaParameter]:
-    """Returns the name of the geo-parameter and the geo-parameter.
-    It a string is given, the string and None is returned.
-    Otherwise an error is thrown"""
-    if is_gp(parameter):
-        if init and is_gp_class(parameter):
-            parameter = parameter()
-        return parameter.name, parameter
-    elif isinstance(parameter, str):
-        return parameter, None
-    else:
-        raise TypeError(
-            f"Can only decode types 'MetaParameter' and 'str', not '{type(parameter).__name__}'"
-        )
-
-
-def is_gp(parameter) -> bool:
-    """Checks if the given objects is an instance or class of a geo-parameter"""
-    return is_gp_instance(parameter) or is_gp_class(parameter)
-
-
-def is_gp_instance(parameter) -> bool:
-    """Checks if the given object is an instance of a geo-parameter"""
-    return isinstance(parameter, MetaParameter)
-
-
-def is_gp_class(parameter) -> bool:
-    """Checks if the given object is a geo-parameter class (i.e. a subclass of MetaParameter"""
-    try:
-        return issubclass(parameter, MetaParameter)
-    except TypeError:
-        return False
