@@ -13,6 +13,7 @@ class WindParameter(MetaParameter):
             assert param_type in [
                 "magnitude",
                 "direction",
+                "opposite_direction",
                 "x",
                 "y",
                 "period",

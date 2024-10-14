@@ -1,12 +1,25 @@
 from geo_parameters.metaparameter import MetaParameter
 from geo_parameters.ureg import ureg
 from .relationships import RELATIONSHIPS
+from typing import Optional
 
 
 class OceanParameter(MetaParameter):
     @classmethod
-    def my_family(cls):
-        """Returns the dictonary containing the parameters where cls is in"""
+    def my_family(cls, param_type: Optional[str] = None):
+        """Returns the dictonary containing the parameters where cls is in.
+        Use .my_family('direction') to get the parameter isntead of a dict"""
+        if param_type is not None:
+            assert param_type in [
+                "magnitude",
+                "direction",
+                "opposite_direction",
+                "x",
+                "y",
+                "period",
+                "frequency",
+            ]
+
         for rel in RELATIONSHIPS:
             for param in rel.values():
                 if type(cls()).__name__ == param:
@@ -14,7 +27,10 @@ class OceanParameter(MetaParameter):
                     eval_rel = {}
                     for key, value in rel.items():
                         eval_rel[key] = eval(value)
-                    return eval_rel
+                    if param_type is not None:
+                        return eval_rel.get(param_type)
+                    else:
+                        return eval_rel
 
         return None
 
