@@ -27,22 +27,22 @@ def test_is_y():
 
 
 def test_is_mag():
-    assert gp.wind.Wind.i_am() == "mag"
-    assert gp.wind.Gust().i_am() == "mag"
-    assert gp.wave.Stokes().i_am() == "mag"
-    assert gp.ocean.Current().i_am() == "mag"
+    assert gp.wind.Wind.i_am() == "magnitude"
+    assert gp.wind.Gust().i_am() == "magnitude"
+    assert gp.wave.Stokes().i_am() == "magnitude"
+    assert gp.ocean.Current().i_am() == "magnitude"
 
 
 def test_is_dir():
-    assert gp.wind.WindDir.i_am() == "dir"
-    assert gp.wind.GustDir().i_am() == "dir"
-    assert gp.wave.StokesDir().i_am() == "dir"
-    assert gp.ocean.CurrentDir().i_am() == "dir"
+    assert gp.wind.WindDir.i_am() == "direction"
+    assert gp.wind.GustDir().i_am() == "direction"
+    assert gp.wave.StokesDir().i_am() == "direction"
+    assert gp.ocean.CurrentDir().i_am() == "direction"
 
 
 def test_get_components_of_self():
     param = gp.wind.XWind
     assert param.my_family().get("x") == param
     assert param.my_family().get("y") == gp.wind.YWind
-    assert param.my_family().get("mag") == gp.wind.Wind
-    assert param.my_family().get("dir") == gp.wind.WindDir
+    assert param.my_family().get("magnitude") == gp.wind.Wind
+    assert param.my_family().get("direction") == gp.wind.WindDir

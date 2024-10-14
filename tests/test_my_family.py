@@ -16,6 +16,8 @@ def test_wind_family():
         gp.wind.WindDirTo,
     }
 
+    assert gp.wind.XWind().my_family().get("x") == gp.wind.XWind().my_family("x")
+
     assert set(gp.wind.XWind.my_family().values()) == {
         gp.wind.XWind,
         gp.wind.YWind,
@@ -23,7 +25,9 @@ def test_wind_family():
         gp.wind.WindDir,
         gp.wind.WindDirTo,
     }
-    assert gp.wind.XWind.my_family().get("opposite_dir").is_same(gp.wind.WindDirTo)
+    assert (
+        gp.wind.XWind.my_family().get("opposite_direction").is_same(gp.wind.WindDirTo)
+    )
 
 
 def test_stokes_family():
@@ -44,7 +48,9 @@ def test_stokes_family():
     }
 
     assert (
-        gp.wave.XStokes.my_family().get("opposite_dir").is_same(gp.wave.StokesDirFrom)
+        gp.wave.XStokes.my_family()
+        .get("opposite_direction")
+        .is_same(gp.wave.StokesDirFrom)
     )
 
 
@@ -67,7 +73,7 @@ def test_current_family():
 
     assert (
         gp.ocean.XCurrent.my_family()
-        .get("opposite_dir")
+        .get("opposite_direction")
         .is_same(gp.ocean.CurrentDirFrom)
     )
 
