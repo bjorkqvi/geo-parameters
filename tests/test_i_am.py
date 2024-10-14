@@ -3,7 +3,13 @@ import geo_parameters as gp
 
 def test_no_role():
     assert gp.wave.Hs.i_am() is None
-    assert gp.wave.Tp().i_am() is None
+    assert gp.wave.SprPSwell.i_am() is None
+
+
+def test_period():
+    assert gp.wave.Tp().i_am() == "period"
+    assert gp.wave.Fp().i_am() == "frequency"
+    assert gp.wave.Wp().i_am() == "angular_frequency"
 
 
 def test_is_x():

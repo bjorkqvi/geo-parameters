@@ -73,7 +73,6 @@ def test_current_family():
 
 
 def test_periods():
-    breakpoint()
     assert gp.wave.Tp.i_am() == "period"
     assert gp.wave.Tp.my_family().get("frequency").is_same(gp.wave.Fp)
     assert gp.wave.Tp.my_family().get("angular_frequency").is_same(gp.wave.Wp)
