@@ -375,6 +375,21 @@ class Tm02Sea(WaveParameter):
     _unit = ureg.s
 
 
+## Wavenumbers and wavelengths
+class Km(WaveParameter):
+    name = "km"
+    _long_name = "mean_wavenumber"
+    _standard_name = "sea_surface_wave_mean_wavenumber_from_variance_spectral_density_first_wavenumber_moment"
+    _unit = ureg.rad / ureg.m
+
+
+class Lm_10(WaveParameter):
+    name = "lm_10"
+    _long_name = "inverse_moment_mean_wavelength"
+    _standard_name = "sea_surface_wave_mean_wavelength_from_variance_spectral_density_inverse_wavenumber_moment"
+    _unit = ureg.m
+
+
 ## Directions
 class Dirm(WaveParameter):
     name = "dirm"
