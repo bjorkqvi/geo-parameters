@@ -6,7 +6,7 @@ from typing import Optional
 
 class OceanParameter(MetaParameter):
     @classmethod
-    def my_family(cls, param_type: Optional[str] = None):
+    def my_family(cls, param_type: Optional[str] = None) -> dict:
         """Returns the dictonary containing the parameters where cls is in.
         Use .my_family('direction') to get the parameter isntead of a dict"""
         if param_type is not None:
@@ -32,7 +32,7 @@ class OceanParameter(MetaParameter):
                     else:
                         return eval_rel
 
-        return None
+        return {}
 
 
 class WaterDepth(OceanParameter):

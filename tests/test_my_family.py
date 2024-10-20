@@ -3,8 +3,8 @@ import geo_parameters as gp
 
 def test_no_family():
 
-    assert gp.wave.Hs.my_family() is None
-    assert gp.wave.SprPSea().my_family() is None
+    assert gp.wave.Hs.my_family() == {}
+    assert gp.wave.SprPSea().my_family() == {}
 
 
 def test_wind_family():
