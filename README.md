@@ -14,7 +14,7 @@ $ pip install geo-parameters
 or
 
 ```shell
-$ conda install conda-forge geo-parameters
+$ conda install -c conda-forge geo-parameters
 ```
 
 ## Names of parameters
@@ -22,100 +22,131 @@ $ conda install conda-forge geo-parameters
 The parameters are classes in sub-modules according to the physical property (wave, ocean, wind)
 
 ```python
-from geo_parameters.wave import Hs, Tp
+>>> import geo_parameters as gp
 ```
 
-These classes have information about the parameter:
+These classes have information about the parameter, such as CF standard name, units and directional convention. Units are tracked by using the ```pint``` package, and the directional type is parsed from the standard names.
 
 ```python
-Hs.standard_name()
+>>> gp.wave.Hs.standard_name()
 'sea_surface_wave_significant_height'
+
+>>> gp.wave.Hs.units()
+<Unit('meter')>
+>>> str(gp.wave.Hs.units())
+'m'
+
+>>> gp.wave.Hs.dir_type()
+None
+
+>>> gp.wave.Dirp.standard_name()
+'sea_surface_wave_from_direction_at_variance_spectral_density_maximum'
+>>> gp.wave.Dirp.dir_type()
+'from'
+
+>>> gp.wave.DirpTo.standard_name()
+'sea_surface_wave_to_direction_at_variance_spectral_density_maximum'
+>>> gp.wave.DirpTo.dir_type()
+'to'
 ```
+
 Every parameters has a pre-defined name
 
 ```python
-Hs.name
+>>> gp.wave.Hs.name
 'hs'
 ```
 If you want to define some other names for the parameters, then you can create an instance. By default the name of the instance is the short name, but this can be changed:
 
 ```python
-hsig = Hs()
-hsig.name
+>>> hsig = gp.wave.Hs()
+>>> hsig.name
 'hs'
 
-hsig = Hs(name='hsig')
-hsig.name
+>>> hsig = gp.wave.Hs('hsig')
+>>> hsig.name
 'hsig'
 ```
-
 
 The instance still contains the standard name (and some long name that doesn't follow any standard):
 
 ```python
-hsig.standard_name() 
+>>> hsig.standard_name() 
 'sea_surface_wave_significant_height'
 
-hsig.long_name() 
+>>> hsig.long_name() 
 'significant_wave_height'
 ```
 
 If the parameter has several standard names, you can use the alias-keyword
 
 ```python
-hsig.standard_name(alias=True) 
+>>> hsig.standard_name(alias=True) 
 'significant_height_of_wind_and_swell_waves'
 ```
 
 If the parameter has only one standard name, alias does nothing:
 
 ```python
-Tp.standard_name()
+>>> Tp.standard_name()
 'sea_surface_wave_period_at_variance_spectral_density_maximum'
 
-Tp.standard_name(alias=True)
+>>> Tp.standard_name(alias=True)
 'sea_surface_wave_period_at_variance_spectral_density_maximum'
+```
+## Decoding parameters
+
+If the code can receive either a geo-parameter or a string, there are some helpful functions to deal with this situation. First we can check if a geo-parameter (class or isntance) is provided
+
+```python
+>>> gp.is_gp(gp.wave.Hs)
+True
+>>> gp.is_gp(gp.wave.Hs())
+True
+
+>>> gp.is_gp_class(gp.wave.Hs)
+True
+>>> gp.is_gp_class(gp.wave.Hs())
+False
+
+>>> gp.is_gp_instance(gp.wave.Hs)
+False
+>>> gp.is_gp_instance(gp.wave.Hs())
+True
+```
+
+In addition we can decode a geo-parameter or string to a string with the name and the geo-parameter (or None):
+
+```python
+>>> gp.decode('hs')
+'hs', None
+
+>>> gp.decode(gp.wave.Hs)
+'hs', gp.wave.Hs
+
+>>> gp.decode(gp.wave.Hs('hsig')
+'hsig', gp.wave.Hs('hsig')
+
+>>> gp.decode(gp.wave.Hs, init=True)
+'hs', gp.wave.Hs()
 ```
 
 ## Finding parameters
 
-The right class can be found from a name using the get function:
+The right class can be found usin the standard name with the get function:
 
 ```python
-from geo_parameters import get as gpget
-```
-
-The parameter can then be fetched using the standard name, the alias or the short name:
-
-```python
-gpget("sea_surface_wave_significant_height")
+>>> gp.get("sea_surface_wave_significant_height")
 <class 'geo_parameters.geo_parameters.wave.Hs'>
 
-gpget("significant_height_of_wind_and_swell_waves")
-<class 'geo_parameters.geo_parameters.wave.Hs'>
-
-gpget("hs")
+>>> gp.get("significant_height_of_wind_and_swell_waves") # alias of standard name
 <class 'geo_parameters.geo_parameters.wave.Hs'>
 ```
 
-A dict of all available parameters can also be compiled:
+If an xarray Dataset has standard_name attributes, the correct key(s) can be found using the class-method:
 
 ```python
-from geo_parameters import dict_of_parameters
-```
-
-```python
-dop = dict_of_parameters()
-dop = dict_of_parameters(alias=True)
-dop = dict_of_parameters(short=True)
-```
-
-where the keywords define what string will serve as key in the dictonary (the value is always the parameter class).
-
-If an xarray Dataset has standard_name attributes, the correct key can be found using the class-method:
-
-```python
-ds
+>>> ds
 <xarray.Dataset> Size: 1kB
 Dimensions:              (lat: 11, lon: 6)
 Coordinates:
@@ -126,7 +157,7 @@ Data variables:
     peak_period          (lat, lon) float64 528B 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0
 ```
 ```python
-ds.interesting_hs_name
+>>> ds.interesting_hs_name
 <xarray.DataArray 'interesting_hs_name' (lat: 11, lon: 6)> Size: 528B
 array([[0., 0., 0., 0., 0., 0.],
        [0., 0., 0., 0., 0., 0.],
@@ -141,14 +172,73 @@ Attributes:
 ```
 
 ```python
-Hs.find_me_in_ds(ds)
+>>> gp.wave.Hs.find_me_in_ds(ds)
 ['interesting_hs_name']
 
-Tp.find_me_in_ds(ds)
+>>> gp.wave.Tp.find_me_in_ds(ds)
 ['peak_period']
 
-Tp.find_me_in_ds(ds, return_first=True)
+>>> Tp.find_me_in_ds(ds, return_first=True)
 'peak_period'
 
 ```
 
+## Relationships between parameters
+
+The parameters also have some knowledge about their relationships with other parameters (if any). These relationships can be e.g. that components make up a magnitude or direction, the direction is the same but opposite direction, or the parameter is the inverse of another (period vs. frequency).
+
+```python
+>>> gp.wind.XWind.standard_name()
+'x_wind'
+>>> gp.wind.XWind.i_am()
+'x'
+
+>>> gp.wind.XWind.my_family()
+{'x': <class 'geo_parameters.wind.XWind'>, 'y': <class 'geo_parameters.wind.YWind'>,
+'magnitude': <class 'geo_parameters.wind.Wind'>, 'direction': <class 'geo_parameters.wind.WindDir'>,
+'opposite_direction': <class 'geo_parameters.wind.WindDirTo'>}
+
+>>> gp.wind.XWind.my_family('magnitude')
+<class 'geo_parameters.wind.Wind'>
+```
+
+```python
+>>> gp.wave.Tp.standard_name()
+'sea_surface_wave_period_at_variance_spectral_density_maximum'
+>>> gp.wave.Tp.i_am()
+'period'
+
+>>> gp.wave.Tp.my_family()
+{'period': <class 'geo_parameters.wave.Tp'>, 'frequency': <class 'geo_parameters.wave.Fp'>,
+'angular_frequency': <class 'geo_parameters.wave.Wp'>}
+
+>>> assert gp.wave.Tp == gp.wave.Tp.my_family('period')
+>>> gp.wave.Tp.my_family('frequency')
+<class 'geo_parameters.wave.Fp'>
+```
+
+```python
+>>> gp.wave.StokesDir.standard_name()
+'sea_surface_wave_stokes_drift_to_direction'
+>>> gp.wave.StokesDir.i_am()
+'direction'
+
+>>> gp.wave.StokesDir.my_family('x')
+<class 'geo_parameters.wave.XStokes'>
+>>> gp.wave.StokesDir.my_family('opposite_direction')
+<class 'geo_parameters.wave.StokesDirFrom'>
+
+>>> gp.wave.StokesDir.my_family('x').standard_name()
+'sea_surface_wave_stokes_drift_x_velocity'
+>>> gp.wave.StokesDir.my_family('opposite_direction').standard_name()
+'sea_surface_wave_stokes_drift_from_direction'
+```
+
+```python
+>>> gp.wave.Hs.my_family()
+{}
+>>> gp.wave.Hs.i_am()
+None
+>>> gp.wave.Hs.my_family('period')
+None 
+```
