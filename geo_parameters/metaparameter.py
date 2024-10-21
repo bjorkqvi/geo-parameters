@@ -162,8 +162,8 @@ class MetaParameter(ABC):
         return False
 
     @classmethod
-    def find_me_in(cls, parameters: Iterable) -> bool:
-        """Gets the parameter in list that matches the class (using .is_same())
+    def find_me_in(cls, parameters: Iterable, return_first: bool = False) -> bool:
+        """Gets the parameters in list that matches the class (using .is_same())
 
         Examples:
         >> gp.wave.Hs.find_me_in([gp.wave.Hs, gp.wave.Tp]) -> gp.wave.Hs
@@ -173,11 +173,18 @@ class MetaParameter(ABC):
         >> swh = gp.wave.Hs("swh")
         >> gp.wave.Hs.find_me_in([swh, 'hs']) -> swh
         """
-
+        matching_params = []
         for param in parameters:
             if cls.is_same(param):
-                return param
-        return None
+                if return_first:
+                    return param
+                else:
+                    matching_params.append(param)
+
+        if return_first:
+            return None
+        else:
+            return matching_params
 
     @classmethod
     def dir_type(cls) -> str:
