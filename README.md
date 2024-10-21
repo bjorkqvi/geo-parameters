@@ -131,58 +131,6 @@ In addition we can decode a geo-parameter or string to a string with the name an
 'hs', gp.wave.Hs()
 ```
 
-## Finding parameters
-
-The right class can be found usin the standard name with the get function:
-
-```python
->>> gp.get("sea_surface_wave_significant_height")
-<class 'geo_parameters.geo_parameters.wave.Hs'>
-
->>> gp.get("significant_height_of_wind_and_swell_waves") # alias of standard name
-<class 'geo_parameters.geo_parameters.wave.Hs'>
-```
-
-If an xarray Dataset has standard_name attributes, the correct key(s) can be found using the class-method:
-
-```python
->>> ds
-<xarray.Dataset> Size: 1kB
-Dimensions:              (lat: 11, lon: 6)
-Coordinates:
-  * lon                  (lon) float64 48B 5.0 6.0 7.0 8.0 9.0 10.0
-  * lat                  (lat) float64 88B 50.0 51.0 52.0 ... 58.0 59.0 60.0
-Data variables:
-    interesting_hs_name  (lat, lon) float64 528B 0.0 0.0 0.0 ... 0.0 0.0 0.0
-    peak_period          (lat, lon) float64 528B 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0
-```
-```python
->>> ds.interesting_hs_name
-<xarray.DataArray 'interesting_hs_name' (lat: 11, lon: 6)> Size: 528B
-array([[0., 0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0., 0.],
-        ...
-       [0., 0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0., 0.]])
-Coordinates:
-  * lon      (lon) float64 48B 5.0 6.0 7.0 8.0 9.0 10.0
-  * lat      (lat) float64 88B 50.0 51.0 52.0 53.0 54.0 ... 57.0 58.0 59.0 60.0
-Attributes:
-    standard_name:  sea_surface_wave_significant_height
-```
-
-```python
->>> gp.wave.Hs.find_me_in_ds(ds)
-['interesting_hs_name']
-
->>> gp.wave.Tp.find_me_in_ds(ds)
-['peak_period']
-
->>> Tp.find_me_in_ds(ds, return_first=True)
-'peak_period'
-
-```
-
 ## Relationships between parameters
 
 The parameters also have some knowledge about their relationships with other parameters (if any). These relationships can be e.g. that components make up a magnitude or direction, the direction is the same but opposite direction, or the parameter is the inverse of another (period vs. frequency).
@@ -242,3 +190,90 @@ None
 >>> gp.wave.Hs.my_family('period')
 None 
 ```
+
+## Finding parameters
+
+The right class can be found usin the standard name with the get function:
+
+```python
+>>> gp.get("sea_surface_wave_significant_height")
+<class 'geo_parameters.geo_parameters.wave.Hs'>
+
+>>> gp.get("significant_height_of_wind_and_swell_waves") # alias of standard name
+<class 'geo_parameters.geo_parameters.wave.Hs'>
+```
+
+If an xarray Dataset has standard_name attributes, the correct key(s) can be found using the class-method:
+
+```python
+>>> ds
+<xarray.Dataset> Size: 1kB
+Dimensions:              (lat: 11, lon: 6)
+Coordinates:
+  * lon                  (lon) float64 48B 5.0 6.0 7.0 8.0 9.0 10.0
+  * lat                  (lat) float64 88B 50.0 51.0 52.0 ... 58.0 59.0 60.0
+Data variables:
+    interesting_hs_name  (lat, lon) float64 528B 0.0 0.0 0.0 ... 0.0 0.0 0.0
+    peak_period          (lat, lon) float64 528B 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0
+```
+```python
+>>> ds.interesting_hs_name
+<xarray.DataArray 'interesting_hs_name' (lat: 11, lon: 6)> Size: 528B
+array([[0., 0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0., 0.],
+        ...
+       [0., 0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0., 0.]])
+Coordinates:
+  * lon      (lon) float64 48B 5.0 6.0 7.0 8.0 9.0 10.0
+  * lat      (lat) float64 88B 50.0 51.0 52.0 53.0 54.0 ... 57.0 58.0 59.0 60.0
+Attributes:
+    standard_name:  sea_surface_wave_significant_height
+```
+
+```python
+>>> gp.wave.Hs.find_me_in_ds(ds)
+['interesting_hs_name']
+
+>>> gp.wave.Tp.find_me_in_ds(ds)
+['peak_period']
+
+>>> Tp.find_me_in_ds(ds, return_first=True)
+'peak_period'
+```
+
+We can also used built-in methods to compare and find parameters, since '==' comparison between difference instances wont work:
+
+```python
+>>> gp.wave.Hs.is_same(gp.wave.Hs()) # class and instance match
+True
+```
+
+We can also check if a parameter is found within a list:
+
+```python
+>>> gp.wave.Hs.is_in([gp.wave.Tp, 'pdir', gp.wave.Hs('swh')])
+True
+```
+
+We can also get a parameter in a list that matches a class (or an instance)
+
+```python
+>>> gp.wave.Hs.find_me_in([gp.wave.Tp, 'pdir', gp.wave.Hs('swh')])
+[<geo_parameters.wave.Hs object at 0x797d8b9ba060>] # Returned: gp.wave.Hs('swh')
+>>> gp.wave.Hs('dont_worry_about_name').find_me_in([gp.wave.Tp, 'pdir', gp.wave.Hs('swh')], return_first=True)
+<geo_parameters.wave.Hs object at 0x7ae7433b70b0>
+
+>>> gp.wave.Hs.find_me_in([gp.wave.Tp, 'pdir', gp.wave.Hs('swh'), gp.wave.Hs])
+[<geo_parameters.wave.Hs object at 0x7ae7433b7b90>, <class 'geo_parameters.wave.Hs'>]
+>>> gp.wave.Hs.find_me_in([gp.wave.Tp, 'pdir', gp.wave.Hs('swh')], return_first=True)
+<geo_parameters.wave.Hs object at 0x7ae7433b7720>
+
+>>> gp.wave.Hs.find_me_in([gp.wave.Tp, 'pdir'])
+[]
+>>> gp.wave.Hs.find_me_in([gp.wave.Tp, 'pdir'], return_first=True)
+None
+```
+
+
+
