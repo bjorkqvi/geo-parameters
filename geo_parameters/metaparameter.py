@@ -162,7 +162,9 @@ class MetaParameter(ABC):
         return False
 
     @classmethod
-    def find_me_in(cls, parameters: Iterable, return_first: bool = False) -> bool:
+    def find_me_in(
+        cls, parameters: Iterable, return_first: bool = False
+    ) -> Union[list, None]:
         """Gets the parameters in list that matches the class (using .is_same())
 
         Examples:
