@@ -3,7 +3,8 @@ name = "geo-parameters"
 version = "0.8.3"
 description = "Metadata of geophysical (especially wave) parameters"
 authors = [ { name = "Jan-Victor Björkqvist", email = "janvb@met.no" } ]
-dependencies = [ "python>=3.9,<3.12", "numpy", "pint" ]
+dependencies = [ "numpy", "pint" ]
+requires-python = ">= 3.9,<3.12"
 readme = "README.md"
 
 #[project.optional-dependencies]

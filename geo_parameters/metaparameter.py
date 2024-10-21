@@ -61,9 +61,6 @@ class MetaParameter(ABC):
     def units(cls) -> Unit:
         return cls._unit
 
-    def quantify(self):
-        return self * self.units()
-
     @classmethod
     def cf(cls) -> str:
         return cls._cf
