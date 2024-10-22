@@ -1,13 +1,27 @@
 import geo_parameters as gp
+import pytest
+
+
+def test_wrong_type():
+    with pytest.raises(ValueError):
+        gp.wave.Hs.my_family("ttt")
+    with pytest.raises(ValueError):
+        gp.wind.Wind.my_family("ttt")
+    with pytest.raises(ValueError):
+        gp.grid.Lon.my_family("ttt")
+    with pytest.raises(ValueError):
+        gp.ocean.Current.my_family("ttt")
 
 
 def test_no_family():
 
     assert gp.wave.Hs.my_family() == {}
     assert gp.wave.SprPSea().my_family() == {}
+    assert gp.wave.SprPSea().my_family("magnitude") is None
 
 
 def test_wind_family():
+
     assert set(gp.wind.XWind().my_family().values()) == {
         gp.wind.XWind,
         gp.wind.YWind,

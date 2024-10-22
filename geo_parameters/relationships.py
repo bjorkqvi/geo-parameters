@@ -1,5 +1,17 @@
 """This module keeps track of the relationships between the parameters"""
 
+from typing import Union
+
+PARAM_TYPES = [
+    "magnitude",
+    "direction",
+    "opposite_direction",
+    "x",
+    "y",
+    "period",
+    "frequency",
+]
+
 RELATIONSHIPS = [
     {
         "x": "XWind",
@@ -40,3 +52,18 @@ RELATIONSHIPS = [
     {"period": "TmSwell2", "frequency": "FmSwell2"},
     {"period": "TmSwell3", "frequency": "FmSwell3"},
 ]
+
+
+def _verify_param_type(param_type: str) -> None:
+    """Verifies that the given parameter type is known"""
+    if param_type is not None and param_type not in PARAM_TYPES:
+        raise ValueError(f"'param_type' need to be {PARAM_TYPES}, not {param_type}!")
+
+
+def _get_family_dict(cls) -> dict:
+    """Gets a family dictionary of parameters as strings"""
+    for rel_dict in RELATIONSHIPS:
+        if type(cls()).__name__ in rel_dict.values():
+            return rel_dict
+
+    return {}

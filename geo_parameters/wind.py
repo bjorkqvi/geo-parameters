@@ -1,38 +1,26 @@
 from geo_parameters.metaparameter import MetaParameter
 from geo_parameters.ureg import ureg
-from typing import Optional
-from .relationships import RELATIONSHIPS
+from typing import Optional, Union
+from .relationships import _get_family_dict, _verify_param_type
 
 
 class WindParameter(MetaParameter):
     @classmethod
-    def my_family(cls, param_type: Optional[str] = None) -> dict:
+    def my_family(cls, param_type: Optional[str] = None) -> Union[dict, None]:
         """Returns the dictonary containing the parameters where cls is in.
         Use .my_family('direction') to get the parameter isntead of a dict"""
-        if param_type is not None:
-            assert param_type in [
-                "magnitude",
-                "direction",
-                "opposite_direction",
-                "x",
-                "y",
-                "period",
-                "frequency",
-            ]
 
-        for rel in RELATIONSHIPS:
-            for param in rel.values():
-                if type(cls()).__name__ == param:
-                    # This needs to be done to circument circular imports etc
-                    eval_rel = {}
-                    for key, value in rel.items():
-                        eval_rel[key] = eval(value)
-                    if param_type is not None:
-                        return eval_rel.get(param_type)
-                    else:
-                        return eval_rel
+        _verify_param_type(param_type)
+        family_dict = _get_family_dict(cls)
 
-        return {}
+        if param_type is None:  # Return entire family_dict
+            return_dict = {}
+            for key, value in family_dict.items():
+                # E.g. eval("XWind"), which can't be done outside of this module
+                return_dict[key] = eval(value)
+            return return_dict
+        else:  # Retrun class for requested parameter type
+            return eval(family_dict.get(param_type, "None"))
 
 
 class XWind(WindParameter):
