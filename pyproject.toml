@@ -1,17 +1,11 @@
 [project]
 name = "geo-parameters"
-version = "0.9.0"
+version = "0.9.1"
 description = "Metadata of geophysical (especially wave) parameters"
 authors = [ { name = "Jan-Victor Björkqvist", email = "janvb@met.no" } ]
 dependencies = [ "numpy", "pint" ]
-requires-python = ">= 3.9,<3.12"
+requires-python = ">=3.9,<3.12"
 readme = "README.md"
-
-#[project.optional-dependencies]
-#tests = [ "numpy", "xarray", "pandas", "utm", "geopy"]
 
 [project.urls]
 repository = "http://github.com/bjorkqvi/geo-parameters"
-
-# [project.scripts]
-# "sfydata" = "sfy.cli.sfydata:sfy"
