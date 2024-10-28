@@ -28,6 +28,13 @@ RELATIONSHIPS = [
         "opposite_direction": "GustDirTo",
     },
     {
+        "x": "XFrictionVelocity",
+        "y": "YFrictionVelocity",
+        "magnitude": "FrictionVelocity",
+        "direction": "FrictionVelocityDir",
+        "opposite_direction": "FrictionVelocityDirTo",
+    },
+    {
         "x": "XCurrent",
         "y": "YCurrent",
         "magnitude": "Current",

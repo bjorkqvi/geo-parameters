@@ -92,6 +92,33 @@ def test_current_family():
     )
 
 
+def test_friction_velocity_family():
+    assert set(gp.wind.XFrictionVelocity().my_family().values()) == {
+        gp.wind.XFrictionVelocity,
+        gp.wind.YFrictionVelocity,
+        gp.wind.FrictionVelocity,
+        gp.wind.FrictionVelocityDir,
+        gp.wind.FrictionVelocityDirTo,
+    }
+
+    assert gp.wind.XFrictionVelocity().my_family().get(
+        "x"
+    ) == gp.wind.XFrictionVelocity().my_family("x")
+
+    assert set(gp.wind.YFrictionVelocity.my_family().values()) == {
+        gp.wind.XFrictionVelocity,
+        gp.wind.YFrictionVelocity,
+        gp.wind.FrictionVelocity,
+        gp.wind.FrictionVelocityDir,
+        gp.wind.FrictionVelocityDirTo,
+    }
+    assert (
+        gp.wind.XFrictionVelocity.my_family()
+        .get("opposite_direction")
+        .is_same(gp.wind.FrictionVelocityDirTo)
+    )
+
+
 def test_periods():
     assert gp.wave.Tp.i_am() == "period"
     assert gp.wave.Tp.my_family().get("frequency").is_same(gp.wave.Fp)

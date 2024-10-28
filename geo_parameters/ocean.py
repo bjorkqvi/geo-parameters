@@ -6,7 +6,9 @@ from .relationships import _get_family_dict, _verify_param_type
 
 class OceanParameter(MetaParameter):
     @classmethod
-    def my_family(cls, param_type: Optional[str] = None) -> Union[dict, None]:
+    def my_family(
+        cls, param_type: Optional[str] = None
+    ) -> Union[dict[str, type["OceanParameter"]], type["OceanParameter"], None]:
         """Returns the dictonary containing the parameters where cls is in.
         Use .my_family('direction') to get the parameter isntead of a dict"""
 

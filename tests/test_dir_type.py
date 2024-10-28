@@ -10,6 +10,10 @@ def test_no_dir_type():
     assert param.dir_type() is None
     assert param2.dir_type() is None
 
+    assert gp.wind.FrictionVelocity.dir_type() is None
+    assert gp.wind.XFrictionVelocity.dir_type() is None
+    assert gp.wind.YFrictionVelocity.dir_type() is None
+
 
 def test_dir_type_from():
     assert gp.wave.Dirp.dir_type() == "from"
@@ -27,6 +31,8 @@ def test_dir_type_from():
     assert param3.dir_type() == "from"
     assert param4.dir_type() == "from"
 
+    assert gp.wind.FrictionVelocityDir.dir_type() == "from"
+
 
 def test_dir_type_to():
     assert gp.wave.DirpTo.dir_type() == "to"
@@ -43,3 +49,4 @@ def test_dir_type_to():
     assert param2.dir_type() == "to"
     assert param3.dir_type() == "to"
     assert param4.dir_type() == "to"
+    assert gp.wind.FrictionVelocityDirTo.dir_type() == "to"

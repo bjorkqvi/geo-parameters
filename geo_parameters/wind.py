@@ -6,7 +6,9 @@ from .relationships import _get_family_dict, _verify_param_type
 
 class WindParameter(MetaParameter):
     @classmethod
-    def my_family(cls, param_type: Optional[str] = None) -> Union[dict, None]:
+    def my_family(
+        cls, param_type: Optional[str] = None
+    ) -> Union[dict[str, type["WindParameter"]], type["WindParameter"], None]:
         """Returns the dictonary containing the parameters where cls is in.
         Use .my_family('direction') to get the parameter isntead of a dict"""
 
@@ -96,5 +98,43 @@ class GustDirTo(WindParameter):
     name = "gust_dir"
     _long_name = "wind_gust_direction"
     _standard_name = "wind_gust_to_direction"
+    _unit = ureg.deg
+    _cf = False
+
+
+class XFrictionVelocity(WindParameter):
+    name = "x_fv"
+    _long_name = "x_friction_velocity"
+    _standard_name = "eastward_friction_velocity_in_air"
+    _unit = ureg.m / ureg.s
+
+
+class YFrictionVelocity(WindParameter):
+    name = "y_fv"
+    _long_name = "y_friction_velocity"
+    _standard_name = "northward_friction_velocity_in_air"
+    _unit = ureg.m / ureg.s
+
+
+class FrictionVelocity(WindParameter):
+    name = "fv"
+    _long_name = "friction_velocity"
+    _standard_name = "friction_velocity_in_air"
+    _unit = ureg.m / ureg.s
+    _cf = False
+
+
+class FrictionVelocityDir(WindParameter):
+    name = "fv_dir"
+    _long_name = "friction_velocity_direction"
+    _standard_name = "friction_velocity_in_air_from_direction"
+    _unit = ureg.deg
+    _cf = False
+
+
+class FrictionVelocityDirTo(WindParameter):
+    name = "fv_dir"
+    _long_name = "friction_velocity_direction"
+    _standard_name = "friction_velocity_in_air_to_direction"
     _unit = ureg.deg
     _cf = False
