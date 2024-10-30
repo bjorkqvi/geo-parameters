@@ -718,6 +718,20 @@ class Qvth(WaveParameter):
     _unit = ureg.m * ureg.m * ureg.m * ureg.s / ureg.rad
 
 
+class Efth_max(WaveParameter):
+    name = "efth_max"
+    _long_name = "maximum_of_directional_variance_spectral_density"
+    _standard_name = "sea_surface_wave_energy_at_variance_spectral_density_maximum"
+    _unit = ureg.m * ureg.m * ureg.s / ureg.rad
+
+
+class Ef_max(WaveParameter):
+    name = "emax"
+    _long_name = "maximum_of_variance_spectral_density"
+    _standard_name = "sea_surface_wave_energy_at_variance_spectral_density_maximum"
+    _unit = ureg.m * ureg.m * ureg.s
+
+
 class Freq(WaveParameter):
     name = "freq"
     _long_name = "frequency"
