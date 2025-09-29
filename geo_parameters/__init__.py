@@ -9,4 +9,3 @@ from .parameter_funcs import (
 from .decoders import is_gp, is_gp_instance, is_gp_class, decode
 
 from . import wave, wind, ocean, grid
-from .ureg import ureg

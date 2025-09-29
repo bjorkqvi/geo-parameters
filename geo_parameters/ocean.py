@@ -1,5 +1,4 @@
 from geo_parameters.metaparameter import MetaParameter
-from geo_parameters.ureg import ureg
 from typing import Optional, Union
 from .relationships import _get_family_dict, _verify_param_type
 
@@ -29,7 +28,7 @@ class WaterDepth(OceanParameter):
     name = "depth"
     _long_name = "water_depth"
     _standard_name = "sea_floor_depth_below_sea_surface"
-    _unit = ureg.m
+    _unit = 'm'
 
 
 class SeaLevel(OceanParameter):
@@ -40,7 +39,7 @@ class SeaLevel(OceanParameter):
         "sea_surface_elevation_anomaly",
         "sea_surface_height_above_geoid",
     ]
-    _unit = ureg.m
+    _unit = 'm'
 
 
 class XCurrent(OceanParameter):
@@ -50,7 +49,7 @@ class XCurrent(OceanParameter):
         "sea_water_x_velocity",
         "x_sea_water_velocity",
     ]
-    _unit = ureg.m / ureg.s
+    _unit = 'm/s'
 
 
 class YCurrent(OceanParameter):
@@ -60,14 +59,14 @@ class YCurrent(OceanParameter):
         "sea_water_y_velocity",
         "y_sea_water_velocity",
     ]
-    _unit = ureg.m / ureg.s
+    _unit = 'm/s'
 
 
 class Current(OceanParameter):
     name = "current"
     _long_name = "current_speed"
     _standard_name = "sea_water_speed"
-    _unit = ureg.m / ureg.s
+    _unit = 'm/s'
 
 
 class CurrentDir(OceanParameter):
@@ -78,7 +77,7 @@ class CurrentDir(OceanParameter):
         "sea_water_to_direction",
         "direction_of_sea_water_velocity",
     ]
-    _unit = ureg.deg
+    _unit = 'deg'
 
 
 class CurrentDirFrom(OceanParameter):
@@ -88,18 +87,18 @@ class CurrentDirFrom(OceanParameter):
         "sea_water_velocity_from_direction",
         "sea_water_from_direction",
     ]
-    _unit = ureg.deg
+    _unit = 'deg'
 
 
 class IceFraction(OceanParameter):
     name = "ice_fraction"
     _long_name = "sea_ice_fraction"
     _standard_name = "sea_ice_area_fraction"
-    _unit = ureg.percent
+    _unit = '%'
 
 
 class IceThickness(OceanParameter):
     name = "ice_thickness"
     _long_name = "sea_ice_thickness"
     _standard_name = "sea_ice_thickness"
-    _unit = ureg.m
+    _unit = 'm'
