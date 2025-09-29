@@ -17,7 +17,7 @@ jobs:
         shell: bash -l {0}
     strategy:
       matrix:
-        os: ["windows"]
+        os: ["windows", "ubuntu", "macos"]
         python-version: [ '3.9', '3.10', '3.11', '3.12', '3.13' ]
     steps:
       - uses: actions/checkout@v4
@@ -33,13 +33,10 @@ jobs:
           pytest -vs --log-cli-level=debug
 
       - name: Build wheels
-        shell: cmd
-        run: |    
-          conda install -n base -c conda-forge mamba -y
-          call conda activate test
-          mamba install -n test -c conda-forge flit -y
-          where flit  # Verify if 'flit' is accessible
-          flit --version  # Check the version to confirm installation
+        if: matrix.python-version == '3.9' && matrix.os == 'ubuntu'
+        run: |
+          conda activate test
+          mamba install -c conda-forge flit
           git status
           flit build --format sdist
 
