@@ -33,13 +33,15 @@ jobs:
           pytest -vs --log-cli-level=debug
 
       - name: Build wheels
+        shell: cmd
         run: |    
           conda install -n base -c conda-forge mamba -y
+          call conda activate test
           mamba install -n test -c conda-forge flit -y
-          conda run -n test where flit  # Verify 'flit' is installed
-          conda run -n test flit --version  # Check the version
-          conda run -n test git status
-          conda run -n test flit build --format sdist
+          where flit  # Verify if 'flit' is accessible
+          flit --version  # Check the version to confirm installation
+          git status
+          flit build --format sdist
 
       - name: Upload wheels
         if: matrix.python-version == '3.9' && matrix.os == 'ubuntu'
