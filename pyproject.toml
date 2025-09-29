@@ -4,7 +4,7 @@ version = "0.9.4"
 description = "Metadata of geophysical (especially wave) parameters"
 authors = [ { name = "Jan-Victor Björkqvist", email = "janvb@met.no" } ]
 dependencies = [ "numpy" ]
-requires-python = ">=3.9"
+requires-python = ">=3.9,<=3.13"
 readme = "README.md"
 
 [project.urls]
