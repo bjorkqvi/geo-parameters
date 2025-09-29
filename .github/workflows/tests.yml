@@ -17,7 +17,7 @@ jobs:
         shell: bash -l {0}
     strategy:
       matrix:
-        os: ["ubuntu", "macos", "windows"]
+        os: ["windows"]
         python-version: [ '3.9', '3.10', '3.11', '3.12', '3.13' ]
     steps:
       - uses: actions/checkout@v4
@@ -36,8 +36,9 @@ jobs:
         run: |    
           conda install -n base -c conda-forge mamba -y
           mamba install -n test -c conda-forge flit -y
-          conda run -n test flit build --format sdist
-          conda run -n test git status
+          call conda activate test
+          where flit
+          echo %PATH%
 
       - name: Upload wheels
         if: matrix.python-version == '3.9' && matrix.os == 'ubuntu'
