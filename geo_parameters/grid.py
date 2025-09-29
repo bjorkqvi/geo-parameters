@@ -1,5 +1,4 @@
 from geo_parameters.metaparameter import MetaParameter
-from geo_parameters.ureg import ureg
 from typing import Optional, Union
 from .relationships import _get_family_dict, _verify_param_type
 
@@ -43,7 +42,7 @@ class X(GridParameter):
     name = "x"
     _long_name = "x_distance"
     _standard_name = "distance_in_x_direction"
-    _unit = ureg.m
+    _unit = 'm'
     _cf = False
 
 
@@ -51,7 +50,7 @@ class Y(GridParameter):
     name = "y"
     _long_name = "y_distance"
     _standard_name = "distance_in_y_direction"
-    _unit = ureg.m
+    _unit = 'm'
     _cf = False
 
 

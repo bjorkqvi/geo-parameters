@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
 from typing import Union
-from pint import Unit
 
 from .relationships import RELATIONSHIPS
 from typing import Iterable
@@ -58,7 +57,7 @@ class MetaParameter(ABC):
         return [""]
 
     @classmethod
-    def units(cls) -> Unit:
+    def units(cls) -> str:
         return cls._unit
 
     @classmethod

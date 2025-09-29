@@ -22,9 +22,9 @@ def test_name_of_class():
 
 
 def test_units_of_class():
-    assert str(gp.wave.Hs.units()) == "m"
-    assert str(gp.wave.Efth_max.units()) == "m**2*s/rad"
-    assert str(gp.wave.Ef_max.units()) == "m**2*s"
+    assert gp.wave.Hs.units() == "m"
+    assert gp.wave.Efth_max.units() == "m**2/Hz/rad"
+    assert gp.wave.Ef_max.units() == "m**2/Hz"
 
 
 def test_name_of_instance():
@@ -40,4 +40,4 @@ def test_name_of_instance():
 
 
 def test_units_of_instance():
-    assert str(gp.wave.Hs().units()) == "m"
+    assert gp.wave.Hs().units() == "m"
