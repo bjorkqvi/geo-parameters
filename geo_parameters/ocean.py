@@ -112,8 +112,8 @@ class SeaSurfaceTemperature(OceanParameter):
 
 class SeaSurfaceSalinity(OceanParameter):
     name = 'sss'
-    _long_name = 'sea surface_salinity'
-    _standard_name = "sea surface_salinity"
+    _long_name = 'sea_surface_salinity'
+    _standard_name = "sea_surface_salinity"
     _unit = 'g/kg'
 
 class SeaSurfaceDensity(OceanParameter):
