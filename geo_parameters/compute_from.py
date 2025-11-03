@@ -15,9 +15,9 @@ def one_over_x2pi(x):
 def one_over_x_times_2pi(x):
     return 1/x*2*np.pi
 
-COMPUTE_FROM = {'Fp': {'Tp': one_over_x, 'Wp': one_over_2pi},
-                'Tp': {'Fp': one_over_x, 'Wp': one_over_x_times_2pi},
-                'Wp': {'Fp': times_2pi, 'Tp': one_over_x_times_2pi }
+COMPUTE_FROM = {'Tp': {'Fp': one_over_x},
+                'Fp': {'Wp': one_over_2pi},
+                'Wp': {'Tp': one_over_x_times_2pi }
 }
 
 
