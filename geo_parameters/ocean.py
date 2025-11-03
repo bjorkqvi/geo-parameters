@@ -102,3 +102,23 @@ class IceThickness(OceanParameter):
     _long_name = "sea_ice_thickness"
     _standard_name = "sea_ice_thickness"
     _unit = 'm'
+
+
+class SeaSurfaceTemperature(OceanParameter):
+    name = 'sst'
+    _long_name = 'sea_surface_temperature'
+    _standard_name = "sea_surface_temperature"
+    _unit = 'K'
+
+class SeaSurfaceSalinity(OceanParameter):
+    name = 'sss'
+    _long_name = 'sea surface_salinity'
+    _standard_name = "sea surface_salinity"
+    _unit = 'g/kg'
+
+class SeaSurfaceDensity(OceanParameter):
+    name = 'ssd'
+    _long_name = 'sea_surface_density'
+    _standard_name = "sea_surface_density"
+    _unit = 'kg/m**3'
+
