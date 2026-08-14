@@ -44,7 +44,7 @@ class SeaLevel(OceanParameter):
 
 class XCurrent(OceanParameter):
     name = "x_current"
-    _long_name = "eastward_current_component"
+    _long_name = "x_current_component"
     _standard_name = [
         "sea_water_x_velocity",
         "x_sea_water_velocity",
@@ -54,11 +54,25 @@ class XCurrent(OceanParameter):
 
 class YCurrent(OceanParameter):
     name = "y_current"
-    _long_name = "northward_current_component"
+    _long_name = "y_current_component"
     _standard_name = [
         "sea_water_y_velocity",
         "y_sea_water_velocity",
     ]
+    _unit = 'm/s'
+
+
+class EastCurrent(OceanParameter):
+    name = "u_current"
+    _long_name = "east_current_component"
+    _standard_name = "eastward_sea_water_velocity"
+    _unit = 'm/s'
+
+
+class NorthCurrent(OceanParameter):
+    name = "v_current"
+    _long_name = "north_current_component"
+    _standard_name = "northward_sea_water_velocity"
     _unit = 'm/s'
 
 

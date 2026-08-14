@@ -28,6 +28,8 @@ def test_wind_family():
         gp.wind.Wind,
         gp.wind.WindDir,
         gp.wind.WindDirTo,
+        gp.wind.EastWind,
+        gp.wind.NorthWind,
     }
 
     assert gp.wind.XWind().my_family().get("x") == gp.wind.XWind().my_family("x")
@@ -38,6 +40,8 @@ def test_wind_family():
         gp.wind.Wind,
         gp.wind.WindDir,
         gp.wind.WindDirTo,
+        gp.wind.EastWind,
+        gp.wind.NorthWind,
     }
     assert (
         gp.wind.XWind.my_family().get("opposite_direction").is_same(gp.wind.WindDirTo)
@@ -51,6 +55,8 @@ def test_stokes_family():
         gp.wave.Stokes,
         gp.wave.StokesDir,
         gp.wave.StokesDirFrom,
+        gp.wave.EastStokes,
+        gp.wave.NorthStokes,
     }
 
     assert set(gp.wave.YStokes.my_family().values()) == {
@@ -59,6 +65,8 @@ def test_stokes_family():
         gp.wave.Stokes,
         gp.wave.StokesDir,
         gp.wave.StokesDirFrom,
+        gp.wave.EastStokes,
+        gp.wave.NorthStokes,
     }
 
     assert (
@@ -75,6 +83,8 @@ def test_current_family():
         gp.ocean.Current,
         gp.ocean.CurrentDir,
         gp.ocean.CurrentDirFrom,
+        gp.ocean.EastCurrent,
+        gp.ocean.NorthCurrent,
     }
 
     assert set(gp.ocean.YCurrent.my_family().values()) == {
@@ -83,6 +93,8 @@ def test_current_family():
         gp.ocean.Current,
         gp.ocean.CurrentDir,
         gp.ocean.CurrentDirFrom,
+        gp.ocean.EastCurrent,
+        gp.ocean.NorthCurrent,
     }
 
     assert (
@@ -99,6 +111,8 @@ def test_friction_velocity_family():
         gp.wind.FrictionVelocity,
         gp.wind.FrictionVelocityDir,
         gp.wind.FrictionVelocityDirTo,
+        gp.wind.EastFrictionVelocity,
+        gp.wind.NorthFrictionVelocity,
     }
 
     assert gp.wind.XFrictionVelocity().my_family().get(
@@ -111,6 +125,8 @@ def test_friction_velocity_family():
         gp.wind.FrictionVelocity,
         gp.wind.FrictionVelocityDir,
         gp.wind.FrictionVelocityDirTo,
+        gp.wind.EastFrictionVelocity,
+        gp.wind.NorthFrictionVelocity,
     }
     assert (
         gp.wind.XFrictionVelocity.my_family()

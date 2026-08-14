@@ -37,3 +37,7 @@ def  test_ssd():
     assert ssd.standard_name() == rhow.standard_name()
 
     assert ssd.units() == 'kg/m**3'
+
+def test_current_names():
+    assert gp.ocean.NorthCurrent.standard_name() == "northward_sea_water_velocity"
+    assert gp.ocean.EastCurrent.standard_name() == "eastward_sea_water_velocity"

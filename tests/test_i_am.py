@@ -28,6 +28,23 @@ def test_is_y():
     assert gp.wind.YFrictionVelocity.i_am() == "y"
 
 
+
+def test_is_east():
+    assert gp.wind.EastWind.i_am() == "east"
+    assert gp.wind.EastGust().i_am() == "east"
+    assert gp.wave.EastStokes().i_am() == "east"
+    assert gp.ocean.EastCurrent().i_am() == "east"
+    assert gp.wind.EastFrictionVelocity.i_am() == "east"
+
+
+def test_is_north():
+    assert gp.wind.NorthWind.i_am() == "north"
+    assert gp.wind.NorthGust().i_am() == "north"
+    assert gp.wave.NorthStokes().i_am() == "north"
+    assert gp.ocean.NorthCurrent().i_am() == "north"
+    assert gp.wind.NorthFrictionVelocity.i_am() == "north"
+
+
 def test_is_mag():
     assert gp.wind.Wind.i_am() == "magnitude"
     assert gp.wind.Gust().i_am() == "magnitude"
