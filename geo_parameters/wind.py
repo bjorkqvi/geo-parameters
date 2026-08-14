@@ -44,6 +44,19 @@ class YWind(WindParameter):
     _unit = 'm/s'
 
 
+class EastWind(WindParameter):
+    name = "u_wind"
+    _long_name = "east_wind_component"
+    _standard_name = "eastward_wind"
+    _unit = 'm/s'
+
+
+class NorthWind(WindParameter):
+    name = "v_wind"
+    _long_name = "north_wind_component"
+    _standard_name = "northward_wind"
+    _unit = 'm/s'
+
 class Wind(WindParameter):
     name = "ff"
     _long_name = "wind_speed"
@@ -79,6 +92,22 @@ class YGust(WindParameter):
     _unit = 'm/s'
 
 
+class EastGust(WindParameter):
+    name = "u_gust"
+    _long_name = "east_gust_component"
+    _standard_name = "eastward_wind_gust"
+    _unit = 'm/s'
+    _cf = False
+
+
+class NorthGust(WindParameter):
+    name = "v_gust"
+    _long_name = "north_gust_component"
+    _standard_name = "northward_wind_gust"
+    _unit = 'm/s'
+    _cf = False
+
+
 class Gust(WindParameter):
     name = "gust"
     _long_name = "wind_gust"
@@ -104,23 +133,36 @@ class GustDirTo(WindParameter):
 class XFrictionVelocity(WindParameter):
     name = "x_fv"
     _long_name = "x_friction_velocity"
-    _standard_name = "eastward_friction_velocity_in_air"
+    _standard_name = "x_friction_velocity_in_air"
     _unit = 'm/s'
+    _cf = False
 
 
 class YFrictionVelocity(WindParameter):
     name = "y_fv"
     _long_name = "y_friction_velocity"
-    _standard_name = "northward_friction_velocity_in_air"
+    _standard_name = "y_friction_velocity_in_air"
+    _unit = 'm/s'
+    _cf = False
+
+class EastFrictionVelocity(WindParameter):
+    name = "u_fv"
+    _long_name = "east_friction_velocity"
+    _standard_name = "eastward_friction_velocity_in_air"
     _unit = 'm/s'
 
+
+class NorthFrictionVelocity(WindParameter):
+    name = "v_fv"
+    _long_name = "north_friction_velocity"
+    _standard_name = "northward_friction_velocity_in_air"
+    _unit = 'm/s'
 
 class FrictionVelocity(WindParameter):
     name = "fv"
     _long_name = "friction_velocity"
-    _standard_name = "friction_velocity_in_air"
+    _standard_name = "magnitude_of_surface_friction_velocity_in_air"
     _unit = 'm/s'
-    _cf = False
 
 
 class FrictionVelocityDir(WindParameter):
