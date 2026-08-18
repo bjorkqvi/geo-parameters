@@ -1,5 +1,6 @@
 import geo_parameters as gp
 import numpy as np
+import pytest
 
 FROM_DIRS = [gp.wind.WindDir, gp.wind.FrictionVelocityDir,
              gp.wave.Dirm, gp.wave.Dirp,
@@ -19,14 +20,25 @@ TO_DIRS = [gp.wind.WindDirTo,  gp.wind.FrictionVelocityDirTo,
 wind_from = np.array([0,90,180,270])
 wind_to = np.array([180,270,0,90])
 
-def test_compute_dir_from():
+def test_compute_dir_from_dict():
     for param, to_param in zip(FROM_DIRS, TO_DIRS):
-        compute_dict = param.compute_from()
-        try:
-
-            np.testing.assert_almost_equal(compute_dict.get(to_param)(wind_to), wind_from)
-        except AttributeError:
-            breakpoint()
-        compute_dict = to_param.compute_from()
+        compute_dict = param.compute_dict()
+        np.testing.assert_almost_equal(compute_dict.get(to_param)(wind_to), wind_from)
+        compute_dict = to_param.compute_dict()
         np.testing.assert_almost_equal(compute_dict.get(param)(wind_from), wind_to)
     
+
+def test_compute_dir_from():
+    for param, to_param in zip(FROM_DIRS, TO_DIRS):
+        func = param.compute_from(to_param)
+        np.testing.assert_almost_equal(func(wind_to), wind_from)
+        func = param.compute_from(to_param)
+        np.testing.assert_almost_equal(func(wind_from), wind_to)
+
+
+def test_raises_error():
+    with pytest.raises(NotImplementedError):
+        func = gp.wind.WindDir.compute_from(gp.wind.Wind)
+
+    with pytest.raises(NotImplementedError):
+        func = gp.wind.Wind.compute_from(gp.wind.WindDir)

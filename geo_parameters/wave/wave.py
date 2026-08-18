@@ -3,7 +3,7 @@ from typing import Optional, Union
 from geo_parameters.relationships import _get_family_dict, _verify_param_type
 from geo_parameters.compute_from import _get_compute_from_dict
 from geo_parameters import wave
-
+from typing import Callable
 class WaveParameter(MetaParameter):
     @classmethod
     def my_family(
@@ -23,8 +23,9 @@ class WaveParameter(MetaParameter):
             return return_dict
         else:  # Retrun class for requested parameter type
             return eval(family_dict.get(param_type, "None"))
+
     @classmethod
-    def compute_from(cls):
+    def compute_dict(cls) -> dict["WaveParameter", Callable]:
         compute_dict = _get_compute_from_dict(cls)
         return_dict = {}
         for key, value in compute_dict.items():
@@ -32,3 +33,13 @@ class WaveParameter(MetaParameter):
             return_dict[eval(f"wave.{key}")] = value
 
         return return_dict
+
+
+    @classmethod
+    def compute_from(cls, param) -> Callable:
+        compute_dict = cls.compute_dict()
+        func = compute_dict.get(param)
+        if func is None:
+            raise NotImplementedError(f"No method to calculate {cls} from {param} found!")
+
+        return func
