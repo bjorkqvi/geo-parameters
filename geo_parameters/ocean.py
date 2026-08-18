@@ -2,7 +2,7 @@ from geo_parameters.metaparameter import MetaParameter
 from typing import Optional, Union
 from .relationships import _get_family_dict, _verify_param_type
 
-
+from geo_parameters.compute_from import _get_compute_from_dict
 class OceanParameter(MetaParameter):
     @classmethod
     def my_family(
@@ -23,6 +23,15 @@ class OceanParameter(MetaParameter):
         else:  # Retrun class for requested parameter type
             return eval(family_dict.get(param_type, "None"))
 
+    @classmethod
+    def compute_from(cls):
+        compute_dict = _get_compute_from_dict(cls)
+        return_dict = {}
+        for key, value in compute_dict.items():
+            # E.g. eval("Hs"), which can't be done outside of this module
+            return_dict[eval(key)] = value
+
+        return return_dict
 
 class WaterDepth(OceanParameter):
     name = "depth"
