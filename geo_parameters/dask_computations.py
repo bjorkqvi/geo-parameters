@@ -18,8 +18,8 @@ if TYPE_CHECKING:
     import xarray as xr
 
 def transpose(
-    data: Union[np.ndarray, "da.array", "xr.DataArray"], coord_order: tuple[int]
-) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+    data: Union[np.ndarray, "da.Array", "xr.DataArray"], coord_order: tuple[int]
+) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """Transpose a dask or numpy array"""
     if data_is_dask(data):
         return da.transpose(data, coord_order)
@@ -27,8 +27,8 @@ def transpose(
         return np.transpose(data, coord_order)
 
 def reshape(
-    data: Union[np.ndarray, "da.array", "xr.DataArray"], shape: tuple[int]
-) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+    data: Union[np.ndarray, "da.Array", "xr.DataArray"], shape: tuple[int]
+) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """Reshapes a dask or numpy array"""
     if data_is_dask(data):
         return da.reshape(data, shape)
@@ -36,28 +36,28 @@ def reshape(
         return np.reshape(data, shape)
 
 def expand_dims(
-    data: Union[np.ndarray, "da.array", "xr.DataArray"], axis=tuple[int]
-) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+    data: Union[np.ndarray, "da.Array", "xr.DataArray"], axis=tuple[int]
+) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """Expand the dimensions of a dask or numpy array"""
     if data_is_dask(data):
         return da.expand_dims(data, axis=axis)
     else:
         return np.expand_dims(data, axis=axis)
 
-def deg2rad(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+def deg2rad(data: Union[np.ndarray, "da.Array", "xr.DataArray"]) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """deg2rad on either dask or numpy array"""
     if data_is_dask(data):
         return da.deg2rad(data)
     else:
         return np.deg2rad(data)
-def rad2deg(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+def rad2deg(data: Union[np.ndarray, "da.Array", "xr.DataArray"]) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """rad2deg on either dask or numpy array"""
     if data_is_dask(data):
         return da.rad2deg(data)
     else:
         return np.rad2deg(data)
 
-def cos(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+def cos(data: Union[np.ndarray, "da.Array", "xr.DataArray"]) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """cos on either dask or numpy array"""
     if data_is_dask(data):
         return da.cos(data)
@@ -65,7 +65,7 @@ def cos(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> Union[np.ndarray
         return np.cos(data)
 
 
-def sin(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+def sin(data: Union[np.ndarray, "da.Array", "xr.DataArray"]) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """sin on either dask or numpy array"""
     if data_is_dask(data):
         return da.sin(data)
@@ -74,8 +74,8 @@ def sin(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> Union[np.ndarray
 
 
 def mod(
-    data: Union[np.ndarray, "da.array", "xr.DataArray"], mod: Union[float, int]
-) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+    data: Union[np.ndarray, "da.Array", "xr.DataArray"], mod: Union[float, int]
+) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """mod on either dask or numpy array"""
     if data_is_dask(data):
         return da.mod(data, mod)
@@ -84,8 +84,8 @@ def mod(
 
 
 def arctan2(
-    y: Union[np.ndarray, "da.array", "xr.DataArray"], x: Union[np.ndarray, "da.array", "xr.DataArray"]
-) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+    y: Union[np.ndarray, "da.Array", "xr.DataArray"], x: Union[np.ndarray, "da.Array", "xr.DataArray"]
+) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """arctan2 on either dask or numpy array"""
     if data_is_dask(y) and data_is_dask(x):
         return da.arctan2(y, x)
@@ -94,8 +94,8 @@ def arctan2(
 
 
 def atleast_1d(
-    data: Union[np.ndarray, "da.array", "xr.DataArray"]
-) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+    data: Union[np.ndarray, "da.Array", "xr.DataArray"]
+) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """atleadt_1d on either dask or numpy array"""
     if data_is_dask(data):
         if not data_is_xarray(data):
@@ -115,7 +115,7 @@ def atleast_1d(
                 return data
 
 
-def data_is_dask(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> bool:
+def data_is_dask(data: Union[np.ndarray, "da.Array", "xr.DataArray"]) -> bool:
     """Checks if a data array is a dask array or an xarray Dataset containing a dask array"""
     try:
         import dask.array as da
@@ -126,7 +126,7 @@ def data_is_dask(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> bool:
     except ModuleNotFoundError:
         return False
     
-def data_is_xarray(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> bool:
+def data_is_xarray(data: Union[np.ndarray, "da.Array", "xr.DataArray"]) -> bool:
     """Checks if data is an xarray DataArray"""
     try:
         import xarray as xr
@@ -136,8 +136,8 @@ def data_is_xarray(data: Union[np.ndarray, "da.array", "xr.DataArray"]) -> bool:
 
 
 def undask_me(
-    data: Union[np.ndarray, "da.array", "xr.DataArray"]
-) -> Union[np.ndarray, "da.array", "xr.DataArray"]:
+    data: Union[np.ndarray, "da.Array", "xr.DataArray"]
+) -> Union[np.ndarray, "da.Array", "xr.DataArray"]:
     """Convert a dask array to a numpy array if needed"""
     if data is None:
         return None
