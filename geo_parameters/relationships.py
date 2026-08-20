@@ -10,6 +10,7 @@ PARAM_TYPES = [
     "y",
     "period",
     "frequency",
+    "angular_frequency"
 ]
 
 RELATIONSHIPS = [

@@ -3,8 +3,8 @@ import numpy as np
 from typing import Union
 
 from .relationships import RELATIONSHIPS
-from typing import Iterable
-
+from typing import Iterable, Callable, Optional
+from geo_parameters import compute_funcs
 
 class MetaParameter(ABC):
     _cf = True
@@ -195,3 +195,115 @@ class MetaParameter(ABC):
             if "from_direction" in std_name:
                 return "from"
         return None
+
+    @classmethod
+    def compute_from(cls, param: "MetaParameter", param2: Optional["MetaParameter"]=None) -> Callable:
+        """Finds a way to compute the parameter cls from parameter(s) param (and param2)
+        
+        param2 can be None."""
+        func = get_compute_function(cls, param, param2)
+        return func
+
+
+def get_compute_function(cls, param, param2):
+    """Finds a way to compute the parameter cls from parameter(s) param (and param2)
+    
+    param2 can be None."""
+    if param2 is None:
+        return get_compute_function_one_var(cls, param)
+
+    return get_compute_function_two_vars(cls, param, param2)
+
+def get_compute_function_one_var(cls, param):
+    if param not in cls.my_family().values():
+        return None
+
+    if is_same_class(cls, param):
+        return compute_funcs.id
+    elif cls.i_am() in ['direction', 'opposite_direction'] and param.i_am() in ['direction', 'opposite_direction']:
+        return compute_funcs.flip_180deg 
+    elif cls.i_am() in ['frequency', 'period']  and param.i_am() in ['frequency', 'period']:
+        return compute_funcs.one_over_x
+    elif cls.i_am() == 'angular_frequency':
+        if param.i_am() == 'frequency':
+            return compute_funcs.times_2pi
+        if param.i_am() == 'period':
+                return compute_funcs.one_over_x_times_2pi
+        return None
+    elif param.i_am() == 'angular_frequency':
+        if cls.i_am() == 'frequency':
+            return compute_funcs.one_over_2pi
+        if cls.i_am() == 'period':
+                return compute_funcs.one_over_x_times_2pi
+        return None
+
+def get_compute_function_two_vars(cls, param, param2):
+    if is_same_class(param, param2):
+        return None
+    if param not in cls.my_family().values():
+        return None
+    if param2 not in cls.my_family().values():
+        return None
+
+
+
+    if cls.i_am() == 'magnitude':
+        if param.i_am() in ['x','y'] and param2.i_am() in ['x','y']:
+            return compute_funcs.mag_from_uv
+        if param.i_am() in ['east','north'] and param2.i_am() in ['east','north']:
+            return compute_funcs.mag_from_uv
+
+
+    
+def is_same_class(param1, param2) -> bool:
+    """Checks if parameters (possibly initiated instances) are the same parameter class
+    
+    gp.is_same_class(gp.wave.Hs, gp.wave.Hs) -> True
+    gp.is_same_class(gp.wave.Hs, gp.wave.Hs('swh')) -> True
+    gp.is_same_class(gp.wave.Hs, gp.wave.Tp) -> False"""
+    __, p1 = decode(param1, init=True)
+    __, p2 = decode(param2, init=True)
+
+    return p1.__class__.mro()[0].__name__ == p2.__class__.mro()[0].__name__
+
+
+def decode(parameter, init: bool = False) -> tuple[str, MetaParameter]:
+    """Returns the name of the geo-parameter and the geo-parameter.
+    If a string is given, the string and None is returned, otherwise an error is thrown.
+
+    Examples:
+    >> gp.decode(gp.wave.Hs('hsig)) -> ('hsig', gp.wave.Hs('hsig'))
+    >> gp.decode('hsig') -> ('hsig', None)
+    >> gp.decode(gp.wave.Hs) -> ('hs', gp.wave.Hs)
+    >> gp.decode(gp.wave.Hs, init=True) -> ('hs', gp.wave.Hs())
+    >> gp.decode(<xr.DataArray>) -> *** TypeError: Can only decode types 'MetaParameter' and 'str', not 'DataArray'
+    """
+
+    if is_gp(parameter):
+        if init and is_gp_class(parameter):
+            parameter = parameter()
+        return parameter.name, parameter
+    elif isinstance(parameter, str):
+        return parameter, None
+    else:
+        raise TypeError(
+            f"Can only decode types 'MetaParameter' and 'str', not '{type(parameter).__name__}'"
+        )
+
+
+def is_gp(parameter) -> bool:
+    """Checks if the given objects is an instance or class of a geo-parameter"""
+    return is_gp_instance(parameter) or is_gp_class(parameter)
+
+
+def is_gp_instance(parameter) -> bool:
+    """Checks if the given object is an instance of a geo-parameter"""
+    return isinstance(parameter, MetaParameter)
+
+
+def is_gp_class(parameter) -> bool:
+    """Checks if the given object is a geo-parameter class (i.e. a subclass of MetaParameter"""
+    try:
+        return issubclass(parameter, MetaParameter)
+    except TypeError:
+        return False

@@ -6,6 +6,6 @@ from .parameter_funcs import (
     shortget,
 )
 
-from .decoders import is_gp, is_gp_instance, is_gp_class, decode
-
 from . import wave, wind, ocean, grid, atm
+
+from .metaparameter import decode, is_same_class,is_gp, is_gp_instance, is_gp_class

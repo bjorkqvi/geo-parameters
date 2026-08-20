@@ -20,16 +20,12 @@ TO_DIRS = [gp.wind.WindDirTo,  gp.wind.FrictionVelocityDirTo,
 wind_from = np.array([0,90,180,270])
 wind_to = np.array([180,270,0,90])
 
-def test_compute_dir_from_dict():
-    for param, to_param in zip(FROM_DIRS, TO_DIRS):
-        compute_dict = param.compute_dict()
-        np.testing.assert_almost_equal(compute_dict.get(to_param)(wind_to), wind_from)
-        compute_dict = to_param.compute_dict()
-        np.testing.assert_almost_equal(compute_dict.get(param)(wind_from), wind_to)
-    
 
 def test_compute_dir_from():
     for param, to_param in zip(FROM_DIRS, TO_DIRS):
+        func = param.compute_from(param)
+        np.testing.assert_almost_equal(func(wind_to), wind_to)
+        
         func = param.compute_from(to_param)
         np.testing.assert_almost_equal(func(wind_to), wind_from)
         func = param.compute_from(to_param)
