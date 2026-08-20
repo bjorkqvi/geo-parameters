@@ -1,7 +1,7 @@
 from geo_parameters.metaparameter import MetaParameter
 from typing import Optional, Union, Callable
 from geo_parameters.relationships import _get_family_dict, _verify_param_type
-
+import geo_parameters.wave as wave
 
 class WaveParameter(MetaParameter):
     @classmethod

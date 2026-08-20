@@ -37,12 +37,56 @@ def test_compute_dir_from_components():
         elif magdir[1].dir_type() == 'from':
             np.testing.assert_almost_equal(func(u,v), wind_from)
         elif magdir[1].dir_type() == 'to':
-              np.testing.assert_almost_equal(func(u,v), wind_to)
+            np.testing.assert_almost_equal(func(u,v), wind_to)
 
-        # func = magdir[0].compute_from(uv[1], uv[0])
-        
-        # np.testing.assert_almost_equal(func(v,u), wind_from)
+        func = magdir[1].compute_from(uv[1], uv[0])
 
+        if uv[0].i_am() == 'x':
+            assert func is None
+        elif magdir[1].dir_type() == 'from':
+            np.testing.assert_almost_equal(func(v,u), wind_from)
+        elif magdir[1].dir_type() == 'to':
+            np.testing.assert_almost_equal(func(v,u), wind_to)
+
+def test_compute_u_from_mag_dir():
+    for uv, magdir in zip(COMPONENTS, MAG_DIRS):
+        func = uv[0].compute_from(magdir[0], magdir[1])
+
+        if uv[0].i_am() == 'x':
+            assert func is None
+        elif magdir[1].dir_type() == 'from':
+            np.testing.assert_almost_equal(func(mag, wind_from), u)
+        elif magdir[1].dir_type() == 'to':
+            np.testing.assert_almost_equal(func(mag, wind_to), u)
+
+        func = uv[0].compute_from(magdir[1], magdir[0])
+
+        if uv[0].i_am() == 'x':
+            assert func is None
+        elif magdir[1].dir_type() == 'from':
+            np.testing.assert_almost_equal(func(wind_from, mag), u)
+        elif magdir[1].dir_type() == 'to':
+            np.testing.assert_almost_equal(func(wind_to, mag), u)
+
+def test_compute_v_from_mag_dir():
+    for uv, magdir in zip(COMPONENTS, MAG_DIRS):
+        func = uv[1].compute_from(magdir[0], magdir[1])
+
+        if uv[0].i_am() == 'x':
+            assert func is None
+        elif magdir[1].dir_type() == 'from':
+            np.testing.assert_almost_equal(func(mag, wind_from), v)
+        elif magdir[1].dir_type() == 'to':
+            np.testing.assert_almost_equal(func(mag, wind_to), v)
+
+        func = uv[1].compute_from(magdir[1], magdir[0])
+
+        if uv[0].i_am() == 'x':
+            assert func is None
+        elif magdir[1].dir_type() == 'from':
+            np.testing.assert_almost_equal(func(wind_from, mag), v)
+        elif magdir[1].dir_type() == 'to':
+            np.testing.assert_almost_equal(func(wind_to, mag), v)
 
 def test_no_func():
     assert gp.wind.WindDir.compute_from(gp.wind.Wind) is None

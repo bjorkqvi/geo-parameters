@@ -33,8 +33,6 @@ def test_compute_dir_from():
 
 
 def test_raises_error():
-    with pytest.raises(NotImplementedError):
-        func = gp.wind.WindDir.compute_from(gp.wind.Wind)
+    assert gp.wind.WindDir.compute_from(gp.wind.Wind) is None
 
-    with pytest.raises(NotImplementedError):
-        func = gp.wind.Wind.compute_from(gp.wind.WindDir)
+    assert gp.wind.Wind.compute_from(gp.wind.WindDir) is None

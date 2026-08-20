@@ -1,6 +1,7 @@
 import numpy as np
 from . import dir_conversions
 from functools import partial
+from . import dask_computations
 def one_over_x(x):
     return 1/x
 
@@ -17,10 +18,10 @@ def one_over_x_times_2pi(x):
     return 1/x*2*np.pi
 
 def flip_180deg(x):
-    return np.mod(x+180,360)
+    return dask_computations.mod(x+180,360)
 
 def mag_from_uv(u,v):
-    return np.sqrt(u**2+v**2)
+    return (u**2+v**2)**0.5
 
 def id(x):
     return x
@@ -34,6 +35,22 @@ def dir_from_v_u(v,u, dir_type):
     data = dir_conversions.compute_math_direction(u, v)
     data = dir_conversions.convert_from_math_dir(data, dir_type=dir_type)
     return data
+
+
+def u_from_mag_dir(mag, dir, dir_type):
+    dir = dir_conversions.convert_to_math_dir(dir, dir_type=dir_type)
+    return dask_computations.cos(dir)*mag
+
+def v_from_mag_dir(mag, dir, dir_type):
+    dir = dir_conversions.convert_to_math_dir(dir, dir_type=dir_type)
+    return dask_computations.sin(dir)*mag
+
+def u_from_dir_mag(dir, mag, dir_type):
+    return u_from_mag_dir(mag, dir, dir_type)
+
+def v_from_dir_mag(dir, mag, dir_type):
+    return v_from_mag_dir(mag, dir, dir_type)
+
 
 
 def get_compute_function_one_var(cls, param):
@@ -77,6 +94,17 @@ def get_compute_function_two_vars(cls, param, param2):
         if param.i_am() == 'north' and param2.i_am() == 'east':
             return partial(dir_from_v_u, dir_type=cls.dir_type())
 
+    if cls.i_am() == 'east':
+        if param.i_am() == 'magnitude' and param2.i_am() in ['direction', 'opposite_direction']:
+            return partial(u_from_mag_dir,dir_type=param2.dir_type())
+        if param.i_am() in ['direction', 'opposite_direction'] and param2.i_am() == 'magnitude':
+                    return partial(u_from_dir_mag,dir_type=param.dir_type())
+    if cls.i_am() == 'north':
+        if param.i_am() == 'magnitude' and param2.i_am() in ['direction', 'opposite_direction']:
+            return partial(v_from_mag_dir,dir_type=param2.dir_type())
+        if param.i_am() in ['direction', 'opposite_direction'] and param2.i_am() == 'magnitude':
+                    return partial(v_from_dir_mag,dir_type=param.dir_type())
+        
 # COMPUTE_FROM = {'Tp': {'Fp': one_over_x, 'Wp': one_over_x_times_2pi},
 #                 'Fp': {'Wp': one_over_2pi, 'Tp': one_over_x},
 #                 'Wp': {'Tp': one_over_x_times_2pi, 'Fp': times_2pi },
