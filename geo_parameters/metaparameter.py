@@ -201,57 +201,16 @@ class MetaParameter(ABC):
         """Finds a way to compute the parameter cls from parameter(s) param (and param2)
         
         param2 can be None."""
-        func = get_compute_function(cls, param, param2)
-        return func
+        if param2 is None:
+            if is_same_class(cls, param):
+                return compute_funcs.id
+            return compute_funcs.get_compute_function_one_var(cls, param)
 
 
-def get_compute_function(cls, param, param2):
-    """Finds a way to compute the parameter cls from parameter(s) param (and param2)
-    
-    param2 can be None."""
-    if param2 is None:
-        return get_compute_function_one_var(cls, param)
+        if is_same_class(param, param2):
+            return None
+        return compute_funcs.get_compute_function_two_vars(cls, param, param2)
 
-    return get_compute_function_two_vars(cls, param, param2)
-
-def get_compute_function_one_var(cls, param):
-    if param not in cls.my_family().values():
-        return None
-
-    if is_same_class(cls, param):
-        return compute_funcs.id
-    elif cls.i_am() in ['direction', 'opposite_direction'] and param.i_am() in ['direction', 'opposite_direction']:
-        return compute_funcs.flip_180deg 
-    elif cls.i_am() in ['frequency', 'period']  and param.i_am() in ['frequency', 'period']:
-        return compute_funcs.one_over_x
-    elif cls.i_am() == 'angular_frequency':
-        if param.i_am() == 'frequency':
-            return compute_funcs.times_2pi
-        if param.i_am() == 'period':
-                return compute_funcs.one_over_x_times_2pi
-        return None
-    elif param.i_am() == 'angular_frequency':
-        if cls.i_am() == 'frequency':
-            return compute_funcs.one_over_2pi
-        if cls.i_am() == 'period':
-                return compute_funcs.one_over_x_times_2pi
-        return None
-
-def get_compute_function_two_vars(cls, param, param2):
-    if is_same_class(param, param2):
-        return None
-    if param not in cls.my_family().values():
-        return None
-    if param2 not in cls.my_family().values():
-        return None
-
-
-
-    if cls.i_am() == 'magnitude':
-        if param.i_am() in ['x','y'] and param2.i_am() in ['x','y']:
-            return compute_funcs.mag_from_uv
-        if param.i_am() in ['east','north'] and param2.i_am() in ['east','north']:
-            return compute_funcs.mag_from_uv
 
 
     
