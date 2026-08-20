@@ -1,5 +1,5 @@
 import numpy as np
-
+from . import dir_conversions
 def one_over_x(x):
     return 1/x
 
@@ -23,6 +23,16 @@ def mag_from_uv(u,v):
 
 def id(x):
     return x
+
+def dir_from_u_v(u,v, dir_type):
+    data = dir_conversions.compute_math_direction(u, v)
+    data = dir_conversions.convert_from_math_dir(data, dir_type=dir_type)
+    return data
+
+def dir_from_v_u(v,u, dir_type):
+    data = dir_conversions.compute_math_direction(u, v)
+    data = dir_conversions.convert_from_math_dir(data, dir_type=dir_type)
+    return data
 
 # COMPUTE_FROM = {'Tp': {'Fp': one_over_x, 'Wp': one_over_x_times_2pi},
 #                 'Fp': {'Wp': one_over_2pi, 'Tp': one_over_x},
