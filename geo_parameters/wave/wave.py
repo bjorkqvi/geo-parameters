@@ -21,5 +21,7 @@ class WaveParameter(MetaParameter):
                 return_dict[key] = eval(f"wave.{value}")
             return return_dict
         else:  # Retrun class for requested parameter type
-            return eval(family_dict.get(param_type, "None"))
-
+            if param_type not in family_dict:
+                return None
+            return eval(f"wave.{family_dict.get(param_type)}")
+            
